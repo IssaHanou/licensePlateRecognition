@@ -1,0 +1,4 @@
+function a = checkPlate()
+    i
+    cropToPlate();
+end
