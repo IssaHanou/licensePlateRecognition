@@ -1,4 +1,4 @@
-colorImage = imread('testplate2.jpg');
+colorImage = imread('images/5.JPG');
 I = rgb2gray(colorImage);
 
 % Detect MSER regions.
