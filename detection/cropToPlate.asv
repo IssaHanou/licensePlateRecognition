@@ -1,4 +1,4 @@
-function ans = cropToPlate(boxes, dimensions, im)
+function ans = cropToPlate(boxes, dimensions)
     % Compute the overlap ratio
     overlapRatio = bboxOverlapRatio(boxes, boxes);
 
@@ -14,10 +14,10 @@ function ans = cropToPlate(boxes, dimensions, im)
     componentIndices = conncomp(g);
 
     % Merge the boxes based on the minimum and maximum dimensions.
-    xmin = accumarray(componentIndices', dimensions(1), [], @min);
-    ymin = accumarray(componentIndices', dimensions(2), [], @min);
-    xmax = accumarray(componentIndices', dimensions(3), [], @max);
-    ymax = accumarray(componentIndices', dimensions(4), [], @max);
+    xmin = accumarray(componentIndices', xmin, [], @min);
+    ymin = accumarray(componentIndices', ymin, [], @min);
+    xmax = accumarray(componentIndices', xmax, [], @max);
+    ymax = accumarray(componentIndices', ymax, [], @max);
 
     % Compose the merged bounding boxes using the [x y width height] format.
     textBBoxes = [xmin ymin xmax-xmin+1 ymax-ymin+1];
@@ -30,11 +30,10 @@ function ans = cropToPlate(boxes, dimensions, im)
     ITextRegion = insertShape(im, 'Rectangle', textBBoxes,'LineWidth',3);
 
     figure
-    imshow(ITextRegion);
-    title('Detected Text');
+    imshow(ITextRegion)
+    title('Detected Text')
 
-    I = rgb2gray(im);
     ocrtxt = ocr(I, textBBoxes);
-    ans = [ocrtxt.Text];
+    ans = [ocrtxt.Text]
 
 end

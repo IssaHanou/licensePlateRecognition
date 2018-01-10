@@ -1,3 +1,4 @@
-function a = checkPlate(im)
-    cropToPlate(im);
+function ans = checkPlate(im)
+    [boxes, dimensions] = createRegions(im);
+    ans = cropToPlate(boxes, dimensions, im);
 end
