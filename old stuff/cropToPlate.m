@@ -1,6 +1,4 @@
-function textRegion = getText(image, plate)
-image=imresize(image,[400 NaN]);  
-
+function textRegion = cropToPlate(plate)
 % Detect MSER regions.
 [mserRegions, mserConnComp] = detectMSERFeatures(plate, ...
     'RegionAreaRange',[200 8000],'ThresholdDelta',4);

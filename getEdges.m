@@ -1,24 +1,14 @@
-function [filledImage, B] = getEdges(image)
-image=imresize(image,[400 NaN]);                   %%image loading unit
-g=rgb2gray(image);
-g=medfilt2(g,[3 3]);
+function [labeledImage,original,labelNums] = getEdges(image)
+filtered = medfilt2(image,[3 3]);       %filter image 
 %**********************************
-conc=strel('disk',1);
-gi=imdilate(g,conc);
-ge=imerode(g,conc);            %%%% morphological image processing
-gdiff=imsubtract(gi,ge);
-gdiff=mat2gray(gdiff);
-gdiff=conv2(gdiff,[1 1;1 1]);
-gdiff=imadjust(gdiff,[0.5 0.7],[0 1],.1);
-B=logical(gdiff);
-[a1 b1]=size(B);
-%imshow(B)
-labeledImage = bwlabel(B, 8);
-coloredLabels = label2rgb (labeledImage, 'hsv', 'k', 'shuffle');
-filledImage = imfill (labeledImage, 'holes');
-% st = regionprops(labeledImage, 'BoundingBox' )
-% for k = 1 : length(st)
-%   thisBB = st(k).BoundingBox;
-%   rectangle('Position', [thisBB(1),thisBB(2),thisBB(3),thisBB(4)],...
-%   'EdgeColor','r','LineWidth',2 )
-% end
+disk = strel('disk',1);
+dilatedIm = imdilate(filtered,disk);    %dilated image
+erodedIm = imerode(filtered,disk);      %eroded image
+diff = imsubtract(dilatedIm,erodedIm);  %subtract eroded from dilated to get the edges only
+intensity = mat2gray(diff);             %create intensity image to min and max values
+convoluted = conv2(intensity,[1 1;1 1]);%convolute the intensity image
+contrast = imadjust(convoluted,[0.5 0.7],[0 1],.1);     %get the contrasts
+logicIm = logical(contrast);            %create the logical image, with only binary values
+[labeledImage,labelNums] = bwlabel(logicIm, 8);     %label the image
+original = locigIm;
+end

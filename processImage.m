@@ -1,9 +1,5 @@
 function processImage
-img = imread('images/1.JPG');
+img = imread('images/4.JPG');
 plate = getPlate(img);
-figure
-imshow(plate);
-[textRegions,nums] = getEdges(plate);
-figure
-imshow(textRegions);
+[labelImage,original,labelNums] = getEdges(plate);
 end 
