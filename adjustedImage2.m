@@ -1,5 +1,6 @@
 image = imread('images/6.JPG');
-I=image;
+f=image;
+imshow(f)
 f=imresize(f,[400 NaN]);                   %%image loading unit
 I=rgb2gray(f); %Grayscale image
 g=medfilt2(g,[3 3]);
@@ -16,6 +17,7 @@ seD = strel('diamond',1);
 BWfinal = imerode(BWnobord,seD);
 BWfinal = imerode(BWfinal,seD);
 X = immultiply(BWfinal,I);
+figure;
 imshow(X)
 % BWoutline = bwperim(BWfinal);
 % Segout = I; 
