@@ -14,7 +14,8 @@ BWnobord = imclearborder(BWdfill, 4); %Clear parts connected to border
 seD = strel('diamond',1); %Make it more natural
 BWfinal = imerode(BWnobord,seD); %Eroded...
 BWfinal = imerode(BWfinal,seD); %...twice
-X = immultiply(BWfinal,I); %Multiply the grayscale image with the segmented image
+BWfilt = bwareafilt(BWfinal,1); %Remove non connecting components
+X = immultiply(BWfilt,I); %Multiply the grayscale image with the segmented image
 imshow(X)
 % BWoutline = bwperim(BWfinal);
 % Segout = I; 

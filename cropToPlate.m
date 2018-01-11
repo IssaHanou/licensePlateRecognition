@@ -1,7 +1,7 @@
-function ITextRegion = cropToPlate(image)
+function ITextRegion = cropToPlate(image,X)
 colorImage=image;
 colorImage=imresize(colorImage,[400 NaN]);  
-I = rgb2gray(colorImage);
+I = X;
 
 % Detect MSER regions.
 [mserRegions, mserConnComp] = detectMSERFeatures(I, ...

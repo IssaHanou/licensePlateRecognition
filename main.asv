@@ -1,3 +1,18 @@
-img = imread('images/1.JPG');
-B = adjustedImage(img);
-C = imfuse(A,B)
+img = imread('images/2.JPG');
+X = adjustedImage2(img);
+% % A = cropToPlate(img,X);
+% % imshow(A)
+imshow(X)
+% A = cropToPlate(img);
+% [B,C] = adjustedImage(img);
+% imshow(A)
+% figure
+% imshow(B)
+%C = imfuse(A,B)
+% D = C & 0;
+% for obj = 1 : length(B)
+%     if (B == obj)
+%     D = D | B == obj;
+% end
+% figure
+% imshow(D);
