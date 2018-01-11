@@ -1,23 +1,20 @@
-image = imread('images/6.JPG');
+function X = adjustedImage2(image)
 f=image;
-imshow(f)
-f=imresize(f,[400 NaN]);                   %%image loading unit
+f=imresize(f,[400 NaN]); %Resize the image
 I=rgb2gray(f); %Grayscale image
-g=medfilt2(g,[3 3]);
 %**********************************
-[~, threshold] = edge(I, 'sobel');
+[~, threshold] = edge(I, 'sobel'); %Calculate threshold value
 fudgeFactor = .5;
-BWs = edge(I,'sobel', threshold * fudgeFactor);
-se90 = strel('line', 3, 90);
+BWs = edge(I,'sobel', threshold * fudgeFactor); %Create a binary mask
+se90 = strel('line', 3, 90); 
 se0 = strel('line', 3, 0);
-BWsdil = imdilate(BWs, [se90 se0]);
-BWdfill = imfill(BWsdil, 'holes');
-BWnobord = imclearborder(BWdfill, 4);
-seD = strel('diamond',1);
-BWfinal = imerode(BWnobord,seD);
-BWfinal = imerode(BWfinal,seD);
-X = immultiply(BWfinal,I);
-figure;
+BWsdil = imdilate(BWs, [se90 se0]); %Dilated image
+BWdfill = imfill(BWsdil, 'holes'); %Fill the holes
+BWnobord = imclearborder(BWdfill, 4); %Clear parts connected to border
+seD = strel('diamond',1); %Make it more natural
+BWfinal = imerode(BWnobord,seD); %Eroded...
+BWfinal = imerode(BWfinal,seD); %...twice
+X = immultiply(BWfinal,I); %Multiply the grayscale image with the segmented image
 imshow(X)
 % BWoutline = bwperim(BWfinal);
 % Segout = I; 
