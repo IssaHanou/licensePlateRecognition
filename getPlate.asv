@@ -1,0 +1,21 @@
+function plate = adjustedImage2(image)
+image=imresize(image,[400 NaN]); %Resize the image
+grayIm=rgb2gray(image); %Grayscale image
+%**********************************
+[~, threshold] = edge(grayIm, 'sobel'); %Calculate threshold value
+fudgeFactor = .5;
+BWs = edge(grayIm,'sobel', threshold * fudgeFactor); %Create a binary mask
+se90 = strel('line', 3, 90); 
+se0 = strel('line', 3, 0);
+dilatedIm = imdilate(BWs, [se90 se0]); %Dilated image
+filledHoles = imfill(dilatedIm, 'holes'); %Fill the holes
+noBorders = imclearborder(filledHoles, 4); %Clear parts connected to border
+seD = strel('diamond',1); 
+erodedIm = imerode(noBorders,seD); %Eroded...
+finalIm = imerode(finalIm,seD); %...twice
+X = immultiply(finalIm,grayIm); %Multiply the grayscale image with the segmented image
+end
+% BWoutline = bwperim(BWfinal);
+% Segout = I; 
+% Segout(BWoutline) = 255; 
+% figure, imshow(Segout), title('outlined original image');
