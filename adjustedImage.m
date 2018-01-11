@@ -1,4 +1,4 @@
-function labeledImage = adjustedImage(image)
+function [filledImage, B] = adjustedImage(image)
 f=image;
 f=imresize(f,[400 NaN]);                   %%image loading unit
 g=rgb2gray(f);
@@ -16,9 +16,10 @@ B=logical(gdiff);
 %imshow(B)
 labeledImage = bwlabel(B, 8);
 coloredLabels = label2rgb (labeledImage, 'hsv', 'k', 'shuffle');
-st = regionprops(labeledImage, 'BoundingBox' )
-for k = 1 : length(st)
-  thisBB = st(k).BoundingBox;
-  rectangle('Position', [thisBB(1),thisBB(2),thisBB(3),thisBB(4)],...
-  'EdgeColor','r','LineWidth',2 )
-end
+filledImage = imfill (labeledImage, 'holes');
+% st = regionprops(labeledImage, 'BoundingBox' )
+% for k = 1 : length(st)
+%   thisBB = st(k).BoundingBox;
+%   rectangle('Position', [thisBB(1),thisBB(2),thisBB(3),thisBB(4)],...
+%   'EdgeColor','r','LineWidth',2 )
+% end
