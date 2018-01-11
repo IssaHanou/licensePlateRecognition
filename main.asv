@@ -1,8 +1,21 @@
-img = imread('images/2.JPG');
+img = imread('images/1.JPG');
+grayImage = rgb2gray(img);
 X = adjustedImage2(img);
-% % A = cropToPlate(img,X);
-% % imshow(A)
-imshow(X)
+% A = cropToPlate(img,X);
+%imshow(X)
+
+horizontalProfile = sum(X, 1);
+
+% measurements = regionprops(X, 'Area', 'BoundingBox');
+% allAreas = [measurements.Area]
+% % Crop out each word
+% for blob = 1 : length(measurements)
+% 	% Get the bounding box.
+% 	thisBoundingBox = measurements(blob).BoundingBox;
+% 	% Crop it out of the original gray scale image.
+% 	thisWord = imcrop(grayImage, thisBoundingBox);
+% 	imshow(thisWord); % Display it.
+% end
 % A = cropToPlate(img);
 % [B,C] = adjustedImage(img);
 % imshow(A)

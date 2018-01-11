@@ -1,9 +1,0 @@
-
-
-boxImage = imread('images/binaryX.JPG');
-uint8Image = uint8(255 * binaryImage);
-sceneImage = imread('images/1.JPG');
-
-boxPoints = detectSURFFeatures(boxImage);
-scenePoints = detectSURFFeatures(sceneImage);
-plot(selectStrongest(boxPoints, 100));
