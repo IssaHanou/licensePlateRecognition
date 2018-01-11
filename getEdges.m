@@ -1,7 +1,6 @@
-function [filledImage, B] = adjustedImage(image)
-f=image;
-f=imresize(f,[400 NaN]);                   %%image loading unit
-g=rgb2gray(f);
+function [filledImage, B] = getEdges(image)
+image=imresize(image,[400 NaN]);                   %%image loading unit
+g=rgb2gray(image);
 g=medfilt2(g,[3 3]);
 %**********************************
 conc=strel('disk',1);

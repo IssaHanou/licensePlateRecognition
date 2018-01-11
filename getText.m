@@ -1,10 +1,8 @@
-function ITextRegion = cropToPlate(image)
-colorImage=image;
-colorImage=imresize(colorImage,[400 NaN]);  
-I = rgb2gray(colorImage);
+function textRegion = getText(image, plate)
+image=imresize(image,[400 NaN]);  
 
 % Detect MSER regions.
-[mserRegions, mserConnComp] = detectMSERFeatures(I, ...
+[mserRegions, mserConnComp] = detectMSERFeatures(plate, ...
     'RegionAreaRange',[200 8000],'ThresholdDelta',4);
 
 % Use regionprops to measure MSER properties
@@ -90,12 +88,12 @@ ymax = (1+expansionAmount) * ymax;
 % Clip the bounding boxes to be within the image bounds
 xmin = max(xmin, 1);
 ymin = max(ymin, 1);
-xmax = min(xmax, size(I,2));
-ymax = min(ymax, size(I,1));
+xmax = min(xmax, size(plate,2));
+ymax = min(ymax, size(plate,1));
 
 % Show the expanded bounding boxes
 expandedBBoxes = [xmin ymin xmax-xmin+1 ymax-ymin+1];
-IExpandedBBoxes = insertShape(colorImage,'Rectangle',expandedBBoxes,'LineWidth',3);
+IExpandedBBoxes = insertShape(plate,'Rectangle',expandedBBoxes,'LineWidth',3);
 
 % Compute the overlap ratio
 overlapRatio = bboxOverlapRatio(expandedBBoxes, expandedBBoxes);
@@ -125,8 +123,5 @@ numRegionsInGroup = histcounts(componentIndices);
 textBBoxes(numRegionsInGroup == 1, :) = [];
 
 % Show the final text detection result.
-ITextRegion = insertShape(colorImage, 'Rectangle', textBBoxes,'LineWidth',3);
-
-
-% ocrtxt = ocr(I, textBBoxes);
-% [ocrtxt.Text]
+textRegion = insertShape(plate, 'Rectangle', textBBoxes,'LineWidth',3);
+end
