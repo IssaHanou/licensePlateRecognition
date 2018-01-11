@@ -10,5 +10,5 @@ convoluted = conv2(intensity,[1 1;1 1]);%convolute the intensity image
 contrast = imadjust(convoluted,[0.5 0.7],[0 1],.1);     %get the contrasts
 logicIm = logical(contrast);            %create the logical image, with only binary values
 [labeledImage,labelNums] = bwlabel(logicIm, 8);     %label the image
-original = locigIm;
+original = logicIm;
 end
