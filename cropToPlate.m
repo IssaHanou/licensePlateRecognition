@@ -1,4 +1,6 @@
-colorImage = imread('images/3.JPG');
+function ITextRegion = cropToPlate(image)
+colorImage=image;
+colorImage=imresize(colorImage,[400 NaN]);  
 I = rgb2gray(colorImage);
 
 % Detect MSER regions.
@@ -95,10 +97,6 @@ ymax = min(ymax, size(I,1));
 expandedBBoxes = [xmin ymin xmax-xmin+1 ymax-ymin+1];
 IExpandedBBoxes = insertShape(colorImage,'Rectangle',expandedBBoxes,'LineWidth',3);
 
-figure
-imshow(IExpandedBBoxes)
-title('Expanded Bounding Boxes Text')
-
 % Compute the overlap ratio
 overlapRatio = bboxOverlapRatio(expandedBBoxes, expandedBBoxes);
 
@@ -129,9 +127,6 @@ textBBoxes(numRegionsInGroup == 1, :) = [];
 % Show the final text detection result.
 ITextRegion = insertShape(colorImage, 'Rectangle', textBBoxes,'LineWidth',3);
 
-figure
-imshow(ITextRegion)
-title('Detected Text')
 
-ocrtxt = ocr(I, textBBoxes);
-[ocrtxt.Text]
+% ocrtxt = ocr(I, textBBoxes);
+% [ocrtxt.Text]
