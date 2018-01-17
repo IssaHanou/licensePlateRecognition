@@ -54,7 +54,6 @@ function program_OpeningFcn(hObject, eventdata, handles, varargin)
 
 run('dipstart.m');
 dipimage;
-
 % Choose default command line output for program
 handles.output = hObject;
 
