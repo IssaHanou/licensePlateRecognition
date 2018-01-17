@@ -1,0 +1,11 @@
+function a = getBoxes(labeled, original)
+data = measure(labeled,original,{'Perimeter'},[],Inf,0,0);
+per = data.perimeter;
+[hist, bin] = diphist(data.perimeter, [1, 250], 250);
+stem(bin, hist);
+a = original & 0;
+small = find(per<100);
+for i=1:length(small)
+    a = a | c == small(i);
+end
+end
