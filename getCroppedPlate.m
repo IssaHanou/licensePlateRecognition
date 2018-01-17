@@ -1,4 +1,4 @@
-function croppedImage = getCroppedPlate(binaryImage)
+function croppedImage = getCroppedPlate(binaryImage, plate)
 %Get positions for bounding boxes
 struct = regionprops(binaryImage , 'Area', 'BoundingBox'); 
 [x maxArea] = max([struct.Area]); %Get the biggest area
