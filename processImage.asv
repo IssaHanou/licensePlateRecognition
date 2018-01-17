@@ -7,6 +7,6 @@ array = [st.BoundingBox]; %Get an array of all bounding boxes
 imshow(labelImage);
 hold on;
 for n=1:4:length(array) %Go through the array, but skip 4 as each 4 numbers are the corners of the bounding box
-    rectangle('Position', [array(n) array(n+1) array(n+2) array(n+3)], 'EdgeColor', 'r' ); %Put a rectangle on the place of the bounding box
+    rectangle('Position', [array(n) array(n+1) array(n+2) array(n+3)], 'EdgeColor', 'r' ); %Put a re
 end
 end 
