@@ -52,6 +52,9 @@ function program_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to program (see VARARGIN)
 
+run('dipstart.m');
+dipimage;
+
 % Choose default command line output for program
 handles.output = hObject;
 
@@ -73,7 +76,7 @@ function varargout = program_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on button press in pushbutton1.
+% --- Executes on button press in push  button1.
 function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
