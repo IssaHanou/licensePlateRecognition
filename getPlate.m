@@ -15,4 +15,5 @@ erodedFirst = imerode(noBorders,seD);
 filledPlate = bwareafilt(erodedFirst,1);
 %Multiply the grayscale image with the segmented image to get visible license plate
 plate = immultiply(filledPlate,grayIm); 
+
 end
