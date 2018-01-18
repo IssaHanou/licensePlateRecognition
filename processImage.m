@@ -1,11 +1,11 @@
 function processImage
-img = imread('images/10.JPG'); %Read the input image
+img = imread('images/5.JPG'); %Read the input image
 plate = getPlate(img); %Execute getPlate with the image
-[labelImage,original,labelNums] = getEdges(plate); %Execute getEdges with the image from getPlate
-st = regionprops( labelImage, 'Area', 'BoundingBox' ); %Get where the bounding boxes need to be (Around each label)
-[x maxA] = max([st.Area]); %Get the biggest area
-croppedImage = imcrop(plate,st(maxA).BoundingBox);  %Crop to the part of the biggest area (thus the license plate)
+[labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
+croppedImage = getCroppedPlate(binaryImage, plate);
 imshow(croppedImage)
+
+
 % array = [st.BoundingBox]; %Get an array of all bounding boxes
 % imshow(labelImage);
 % hold on;
