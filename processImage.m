@@ -1,9 +1,13 @@
 function processImage
-img = imread('images/5.JPG'); %Read the input image
+%run('C:\Program Files\DIPImage 2.8.1\dipstart.m');
+%dipimage;
+
+img = imread('images/3.JPG'); %Read the input image
 plate = getPlate(img); %Execute getPlate with the image
-[labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
-croppedImage = getCroppedPlate(binaryImage, plate);
-imshow(croppedImage)
+[labelImage,grayImage,logicImage] = getEdges(plate); %Execute getEdges with the image from getPlate
+croppedImage = getCroppedPlate(logicImage, plate);
+letters = getLetters(labelImage,croppedImage,logicImage);
+display(letters);
 
 
 % array = [st.BoundingBox]; %Get an array of all bounding boxes
