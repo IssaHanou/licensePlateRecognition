@@ -1,9 +1,17 @@
 function processImage
-img = imread('images/5.JPG'); %Read the input image
+img = imread('images/2.JPG'); %Read the input image
 plate = getPlate(img); %Execute getPlate with the image
 [labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
 croppedImage = getCroppedPlate(binaryImage, plate);
-imshow(croppedImage)
+img = rotImage(croppedImage);
+imshow(img)
+
+
+% struct = regionprops(croppedImage , 'Area', 'BoundingBox'); 
+% [x maxArea] = max([struct.Area]);
+% I = imcrop(plate,struct(maxArea).BoundingBox);
+% imshow(I)
+
 
 
 % array = [st.BoundingBox]; %Get an array of all bounding boxes
