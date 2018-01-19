@@ -2,7 +2,7 @@ function processImage
 %run('GUI/dipstart.m');
 %dipimage;
 
-img = imread('images/10.JPG'); %Read the input image
+img = imread('images/1.JPG'); %Read the input image
 plate = getPlate(img); %Execute getPlate with the image
 [labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
 croppedImage = getCroppedPlate(binaryImage, plate);
