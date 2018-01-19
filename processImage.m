@@ -2,26 +2,25 @@ function processImage
 %run('GUI/dipstart.m');
 %dipimage;
 
-img = imread('images/1.JPG'); %Read the input image
+img = imread('images/2.JPG'); %Read the input image
 plate = getPlate(img); %Execute getPlate with the image
 [labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
 croppedImage = getCroppedPlate(binaryImage, plate);
 img = rotImage(croppedImage);
-imshow(img)
 %[hist, bin] = diphist(img, [1, 250], 250);
 % figure;
 % imhist(img)
 % [x y] = imhist(img);
 % count = median(x);
-% count2 = mean(y);
+% count2 = mean(x);
 % disp(count)
 % disp(count2)
 % %figure;
 % %stem(bin, hist);
-% img(img >= 110) = 0;
+% img(img >= (110-count)) = 0;
 % img(img > 0) = 255;
 % figure;
-% imshow(img)
+imshow(img)
 % struct = regionprops(croppedImage , 'Area', 'BoundingBox'); 
 % [x maxArea] = max([struct.Area]);
 % I = imcrop(plate,struct(maxArea).BoundingBox);
