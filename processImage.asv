@@ -1,21 +1,15 @@
 function processImage
-img = imread('images/2.JPG'); %Read the input image
+%run('GUI/dipstart.m');
+%dipimage;
+
+img = imread('images/6.JPG'); %Read the input image
 plate = getPlate(img); %Execute getPlate with the image
 [labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
 croppedImage = getCroppedPlate(binaryImage, plate);
-croppedImage(croppedImage >= 5 & croppedImage <= 100) = 255;
-croppedImage(croppedImage < 255 & croppedImage > 5) = 0;
-[rows, columns] = find(croppedImage);
-row1 = min(rows);
-row2 = max(rows);
-col1 = min(columns);
-col2 = max(columns);
-c = croppedImage(row1:row2, col1:col2);
-b = c&1;
-struct = regionprops(b , 'Area', 'BoundingBox'); 
-[x maxArea] = max([struct.Area]); %Get the biggest area
-e = imcrop(plate,struct(maxArea).BoundingBox); 
-imshow(e)
+img = rotImage(croppedImage);
+[a,b,c] = getEdges(img);
+letters = 
+imshow(c);
 
 
 % struct = regionprops(croppedImage , 'Area', 'BoundingBox'); 

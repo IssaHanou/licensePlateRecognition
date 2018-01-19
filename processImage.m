@@ -2,13 +2,17 @@ function processImage
 %run('GUI/dipstart.m');
 %dipimage;
 
-img = imread('images/6.JPG'); %Read the input image
+img = imread('images/5.JPG'); %Read the input image
 plate = getPlate(img); %Execute getPlate with the image
 [labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
 croppedImage = getCroppedPlate(binaryImage, plate);
 img = rotImage(croppedImage);
-[letters,b,c] = getEdges(img);
-imshow(c);
+[a,b,c] = getEdges(img);
+letters= getLetters(a,b,c);
+figure
+imshow(img);
+%display(letters);
+
 
 
 % struct = regionprops(croppedImage , 'Area', 'BoundingBox'); 
