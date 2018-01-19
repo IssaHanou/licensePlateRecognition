@@ -10,7 +10,7 @@ img = rotImage(croppedImage);
 [a,b,c] = getEdges(img);
 letters = getLetters(a,b,c);
 labelLetters = label(letters);
-display(labelLetters);
+display(letters);
 
 
 % struct = regionprops(croppedImage , 'Area', 'BoundingBox'); 
