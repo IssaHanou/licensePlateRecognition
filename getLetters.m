@@ -5,7 +5,7 @@ per = data.perimeter;
 
 %figure;
 %[hist, bin] = diphist(data.perimeter, [1, 250], 250);
-%stem(bin, hist);       To show the perimeter histogram
+%stem(bin, hist);      
 
 %Create an empty image of size thresIm (the labeled image befor it was labeled)
 letterImage = thresIm & 0; 
