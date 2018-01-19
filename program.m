@@ -81,10 +81,44 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+vidObj = VideoReader('project files/TrainingVideo.avi');
+handles.output = hObject;
+handles.vidObj = vidObj;
+guidata(hObject,handles);
+
+axes(handles.axes1);
+data = readFrame(handles.vidObj);
+h = get(handles.axes1, 'Children');
+image(data);
 
 
 % --- Executes on button press in pushbutton3.
 function pushbutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)while hasFrame(handles.vidObj)
+frameCount = 1;
+timeStamps = [];
+while(hasFrame(handles.vidObj))
+    vidFrame = readFrame(handles.vidObj);
+    h = get(handles.axes1, 'Children');
+    set(h, 'CData', vidFrame);
+    guidata(hObject,handles);
+    timeStamps(end+1) = handles.vidObj.CurrentTime;
+    %newPlate = processImage(vidFrame);
+    data = get(handles.uitable1, 'Data');
+    newData = [data; {newPlate, frameCount, timeStamps(frameCount)}];
+    set(handles.uitable1, 'Data', newData); 
+    frameCount = frameCount + 1;
+    pause(1);
+end
+
+% --- Executes when user attempts to close figure1.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+% Hint: delete(hObject) closes the figure
+stop(handles.vid);
+delete(hObject);
