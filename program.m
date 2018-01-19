@@ -99,6 +99,7 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)while hasFrame(handles.vidObj)
 frameCount = 1;
 timeStamps = [];
+set(handles.uitable1, 'Data', {});
 while(hasFrame(handles.vidObj))
     vidFrame = readFrame(handles.vidObj);
     h = get(handles.axes1, 'Children');
@@ -107,7 +108,7 @@ while(hasFrame(handles.vidObj))
     timeStamps(end+1) = handles.vidObj.CurrentTime;
     %newPlate = processImage(vidFrame);
     data = get(handles.uitable1, 'Data');
-    newData = [data; {newPlate, frameCount, timeStamps(frameCount)}];
+    newData = [data; {'AB-02-DK', frameCount, timeStamps(frameCount)}];
     set(handles.uitable1, 'Data', newData); 
     frameCount = frameCount + 1;
     pause(1);
