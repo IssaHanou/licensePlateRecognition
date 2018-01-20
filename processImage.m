@@ -2,12 +2,12 @@ function processImage
 % run('GUI/dipstart.m');
 % dipimage;
 
-img = imread('images/2.JPG'); %Read the input image
+img = imread('images/1.JPG'); %Read the input image
 plate = getPlate(img); %Execute getPlate with the image
 [labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
 croppedImage = getCroppedPlate(binaryImage, plate);
-%img = rotImage(croppedImage);
-%imshow(img)
+img2 = rotImage(croppedImage);
+imshow(img)
 %figure;
 % [x y] = imhist(img);
 % meanX = mean(x);
@@ -31,17 +31,17 @@ for x=85:5:160
         if(array(n+3) > 10)
             if((array(n+3)/array(n+2)) >= 1.3 && (array(n+3)/array(n+2))<=3)
                 if figures == 0
-                a = imcrop(img, [array(n) array(n+1) array(n+2) array(n+3)]);
+                a = imcrop(img2, [array(n) array(n+1) array(n+2) array(n+3)]);
                 elseif figures == 1
-                b = imcrop(img, [array(n) array(n+1) array(n+2) array(n+3)]);
+                b = imcrop(img2, [array(n) array(n+1) array(n+2) array(n+3)]);
                 elseif figures == 2
-                c = imcrop(img, [array(n) array(n+1) array(n+2) array(n+3)]);
+                c = imcrop(img2, [array(n) array(n+1) array(n+2) array(n+3)]);
                 elseif figures == 3
-                d = imcrop(img, [array(n) array(n+1) array(n+2) array(n+3)]);
+                d = imcrop(img2, [array(n) array(n+1) array(n+2) array(n+3)]);
                 elseif figures == 4
-                e = imcrop(img, [array(n) array(n+1) array(n+2) array(n+3)]);
+                e = imcrop(img2, [array(n) array(n+1) array(n+2) array(n+3)]);
                 elseif figures == 5
-                f = imcrop(img, [array(n) array(n+1) array(n+2) array(n+3)]);
+                f = imcrop(img2, [array(n) array(n+1) array(n+2) array(n+3)]);
                 end
                 figures = figures + 1;
                 if figures == 6
