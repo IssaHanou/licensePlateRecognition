@@ -1,4 +1,4 @@
-function [a,b,c,d,e,f] = getAllLetters(grayImg);
+function [a,b,c,d,e,f,g] = getAllLettersW(grayImg);
 img2 = grayImg;
 for x=60:5:160 % Value x differs per image
     figures = 0;
@@ -30,10 +30,13 @@ for x=60:5:160 % Value x differs per image
                 elseif figures == 5
                 f = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                 sizef = array(n+2) * array(n+3);
+                elseif figures == 6
+                g = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
+                sizeg = array(n+2) * array(n+3);
                 end
                 figures = figures + 1;
-                if figures == 6
-                sizes = [sizea sizeb sizec sized sizee sizef];
+                if figures == 7
+                sizes = [sizea sizeb sizec sized sizee sizef sizeg];
                 small = min(sizes);
                 big = max(sizes);
                 if (big/small < 1.5)
@@ -45,7 +48,7 @@ for x=60:5:160 % Value x differs per image
             end
         end
     end
-    if figures == 6
+    if figures == 7
         break;
     end
 end

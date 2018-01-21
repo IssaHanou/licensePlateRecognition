@@ -1,5 +1,4 @@
 function plate = getPlate(image)
-image = imresize(image,[400 NaN]); %Resize the image (as it is too big)
 grayIm = rgb2gray(image); %Create a grayscale image
 %**********************************
 %Calculate threshold value of the grayscale image
