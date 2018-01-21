@@ -1,15 +1,20 @@
 function [labeledImage,grayImage,binaryImage] = getEdges(image)
-filtered = medfilt2(image,[3 3]);       %filter image 
+%Perform median filtering, where each output pixel contains the median value 
+%  in the 3-by-3 neighborhood around the corresponding pixel in the input image.
+filtered = medfilt2(image,[3 3]);
 %**********************************
+%Creates a disk-shaped structuring element with radius 1
 disk = strel('disk',1);
-dilatedIm = imdilate(filtered,disk);    %dilated image
-erodedIm = imerode(filtered,disk);      %eroded image
+
+%Create a dilated image from the filtered image
+dilatedIm = imdilate(filtered,disk);
+
+%Create a
+erodedIm = imerode(filtered,disk);
 diff = imsubtract(dilatedIm,erodedIm);  %subtract eroded from dilated to get the edges only
 intensity = mat2gray(diff);             %create intensity image to min and max values
 convoluted = conv2(intensity,[1 1;1 1]);%convolute the intensity image
-contrast = imadjust(convoluted,[0.5 0.8],[0 1]);     %get the contrasts
-figure
-imshow(convolu
+contrast = imadjust(convoluted,[0.5 0.7],[0 1],.1);     %get the contrasts
 binaryImage = logical(contrast);            %create the logical image, with only binary values
 [labeledImage,labelNums] = label(binaryImage);     %label the image
 grayImage = convoluted;
