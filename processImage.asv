@@ -1,42 +1,26 @@
 function processImage
-img = imread('images/2.JPG'); %Read the input image
-plate = getPlate(img); %Execute getPlate with the image
-[labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
-croppedImage = getCroppedPlate(binaryImage, plate);
-croppedImage(croppedImage >= 5 & croppedImage <= 100) = 255;
-croppedImage(croppedImage < 255 & croppedImage > 5) = 0;
-[rows, columns] = find(croppedImage);
-row1 = min(rows);
-row2 = max(rows);
-col1 = min(columns);
-col2 = max(columns);
-c = croppedImage(row1:row2, col1:col2);
-b = c&1;
-struct = regionprops(b , 'Area', 'BoundingBox'); 
-[x maxArea] = max([struct.Area]); %Get the biggest area
-e = imcrop(plate,struct(maxArea).BoundingBox); 
-imshow(e)
+% run('GUI/dipstart.m');
+% dipimage;
 
+%Read the input image
+image = imread('images/1.jpg');
+img = imresize(image,[400 NaN]); %Resize the image (as it is too big)
 
-% struct = regionprops(croppedImage , 'Area', 'BoundingBox'); 
-% [x maxArea] = max([struct.Area]);
-% I = imcrop(plate,struct(maxArea).BoundingBox);
-% imshow(I)
+%Execute getPlate with the image
+plate = getPlate(img); 
 
+%Execute getEdges with the image from getPlate
+[labelImage,grayImage,binaryImage] = getEdges(plate);
 
+%Execute getCroppedPlate with the plate image and binary image
+[grayCrop,coor] = getCroppedPlate(binaryImage, plate);
+colorCrop = imcrop(img,coor); 
 
-% array = [st.BoundingBox]; %Get an array of all bounding boxes
-% imshow(labelImage);
-% hold on;
-% for n=1:4:length(array) %Go through the array, but skip 4 as each 4 numbers are the corners of the bounding box
-%     if(array(n+3) > 2)
-%         rectangle('Position', [array(n) array(n+1) array(n+2) array(n+3)], 'EdgeColor', 'r' ); %Put a rectangle on the place of the bounding box
-%     end
-% end
-% hold off;
-% im2 = imfill(labelImage);
-% st2 = regionprops( im2, 'Area', 'BoundingBox' );
-% [a b] = max([st2.Area]);
-%figure;
-%imshow()
+%Execute rotImage with the cropped image
+img = rotImage(grayCrop);
+
+%Execute getAllLetters with the rotated image
+[a,b,c,d,e,f,gray] = getAllLettersY(img);
+array = [a,b,c,d,e,f];
+licensePlate = getLicensePlate([a b c d e f], gray);
 end

@@ -1,34 +1,36 @@
 function processImage
-%run('GUI/dipstart.m');
-%dipimage;
+% run('GUI/dipstart.m');
+% dipimage;
 
-img = imread('images/1.JPG'); %Read the input image
-plate = getPlate(img); %Execute getPlate with the image
-[labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
-croppedImage = getCroppedPlate(binaryImage, plate);
-img = rotImage(croppedImage);
-imshow(img)
+%Read the input image
+image = imread('images/1.jpg');
+img = imresize(image,[400 NaN]); %Resize the image (as it is too big)
 
+%Execute getPlate with the image
+plate = getPlate(img); 
 
-% struct = regionprops(croppedImage , 'Area', 'BoundingBox'); 
-% [x maxArea] = max([struct.Area]);
-% I = imcrop(plate,struct(maxArea).BoundingBox);
-% imshow(I)
+%Execute getEdges with the image from getPlate
+[labelImage,grayImage,binaryImage] = getEdges(plate);
 
+%Execute getCroppedPlate with the plate image and binary image
+[grayCrop,coor] = getCroppedPlate(binaryImage, plate);
+colorCrop = imcrop(img,coor); 
 
+%Execute rotImage with the cropped image
+img = rotImage(grayCrop);
+imshow(img);
 
-% array = [st.BoundingBox]; %Get an array of all bounding boxes
-% imshow(labelImage);
-% hold on;
-% for n=1:4:length(array) %Go through the array, but skip 4 as each 4 numbers are the corners of the bounding box
-%     if(array(n+3) > 2)
-%         rectangle('Position', [array(n) array(n+1) array(n+2) array(n+3)], 'EdgeColor', 'r' ); %Put a rectangle on the place of the bounding box
-%     end
-% end
-% hold off;
-% im2 = imfill(labelImage);
-% st2 = regionprops( im2, 'Area', 'BoundingBox' );
-% [a b] = max([st2.Area]);
-%figure;
-%imshow()
+%Execute getAllLetters with the rotated image
+[a,b,c,d,e,f,gray,value,xcoorletters] = getAllLettersY(img);
+
+%Get the position of the stripes in the license plate
+[pos1, pos2] = getStripes(img, gray,value, xcoorletters);
+
+%Get the characters of every letter/number in the license plate
+[a,b,c,d,e,f] = getPlateChars(a,b,c,d,e,f,gray);
+
+%Get the license plate string
+licensePlate = createLicensePlate(a,b,c,d,e,f,pos1,pos2);
+
+display(licensePlate);
 end
