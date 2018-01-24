@@ -24,6 +24,9 @@ for factor=60:5:160 % Value x differs per image
                 b = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                 sizeb = array(n+2) * array(n+3);
                 xcoorletters(2) = array(n)+(array(n+2)/2);
+                if(array(n) < value(1))
+                    value(1) = array(n);
+                end
                 elseif figures == 2
                 c = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                 sizec = array(n+2) * array(n+3);

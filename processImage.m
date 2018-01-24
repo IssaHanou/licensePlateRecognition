@@ -3,7 +3,7 @@ function processImage
 % dipimage;
 
 %Read the input image
-image = imread('images/1.jpg');
+image = imread('images/6.jpg');
 img = imresize(image,[400 NaN]); %Resize the image (as it is too big)
 %Execute getPlate with the image
 plate = getPlate(img); 
@@ -22,25 +22,28 @@ figure;
 imshow(grayCrop)
 %Execute getAllLetters with the rotated image
 % if y < 250
-    [a,b,c,d,e,f,x] = getAllLettersY(img);
-    a = toBinary(a, x);
-    b = toBinary(b, x);
-    c = toBinary(c, x);
-    d = toBinary(d, x);
-    e = toBinary(e, x);
-    f = toBinary(f, x);
-    figure;
-    imshow(a)
-    figure;
-    imshow(b)
-    figure;
-    imshow(c)
-    figure;
-    imshow(d)
-    figure;
-    imshow(e)
-    figure;
-    imshow(f)
+    [a,b,c,d,e,f,factor,value, xcoorletters] = getAllLettersY(img);
+    a = toBinary(a, factor);
+    b = toBinary(b, factor);
+    c = toBinary(c, factor);
+    d = toBinary(d, factor);
+    e = toBinary(e, factor);
+    f = toBinary(f, factor);
+%      figure;
+%      imshow(a)
+%     figure;
+%     imshow(b)
+%     figure;
+%     imshow(c)
+%     figure;
+%     imshow(d)
+%     figure;
+%     imshow(e)
+%     figure;
+%     imshow(f)
+[pos1, pos2] = getStripes(img, factor,value, xcoorletters);
+disp(pos1)
+disp(pos2)
 % else
 %     [a,b,c,d,e,f,g] = getAllLettersW(img);
 %     figure;
