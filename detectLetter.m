@@ -18,7 +18,8 @@ for i=1:36
     
     %Resize the image to the same size as the image found in the plate
     resizedImage = resizeImage(white, image, gray);
-    diff = double(image) - double(resizedImage);
+    diff = double(image) + double(resizedImage);
+    
     %Store the difference in the array at the position of this character
     [hist, bin] = diphist(diff, [1, 250], 250);
     resultsArray(i) = hist(1);
