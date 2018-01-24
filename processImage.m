@@ -1,34 +1,61 @@
 function processImage
-%run('GUI/dipstart.m');
-%dipimage;
+% run('GUI/dipstart.m');
+% dipimage;
 
-img = imread('images/1.JPG'); %Read the input image
-plate = getPlate(img); %Execute getPlate with the image
-[labelImage,grayImage,binaryImage] = getEdges(plate); %Execute getEdges with the image from getPlate
-croppedImage = getCroppedPlate(binaryImage, plate);
-img = rotImage(croppedImage);
-imshow(img)
+%Read the input image
+image = imread('images/1.jpg');
+img = imresize(image,[400 NaN]); %Resize the image (as it is too big)
+%Execute getPlate with the image
+plate = getPlate(img); 
+%Execute getEdges with the image from getPlate
+[labelImage,grayImage,binaryImage] = getEdges(plate);
 
-
-% struct = regionprops(croppedImage , 'Area', 'BoundingBox'); 
-% [x maxArea] = max([struct.Area]);
-% I = imcrop(plate,struct(maxArea).BoundingBox);
-% imshow(I)
-
-
-
-% array = [st.BoundingBox]; %Get an array of all bounding boxes
-% imshow(labelImage);
-% hold on;
-% for n=1:4:length(array) %Go through the array, but skip 4 as each 4 numbers are the corners of the bounding box
-%     if(array(n+3) > 2)
-%         rectangle('Position', [array(n) array(n+1) array(n+2) array(n+3)], 'EdgeColor', 'r' ); %Put a rectangle on the place of the bounding box
-%     end
+%Execute getCroppedPlate with the plate image and binary image
+[grayCrop,coor] = getCroppedPlate(binaryImage, plate);
+colorCrop = imcrop(img,coor); 
+% [x y] = max(imhist(imgCropped));
+% imhist(imgCropped)
+%Execute rotImage with the cropped image
+img = rotImage(grayCrop);
+imshow(colorCrop)
+figure;
+imshow(grayCrop)
+%Execute getAllLetters with the rotated image
+% if y < 250
+    [a,b,c,d,e,f,x] = getAllLettersY(img);
+    a = toBinary(a, x);
+    b = toBinary(b, x);
+    c = toBinary(c, x);
+    d = toBinary(d, x);
+    e = toBinary(e, x);
+    f = toBinary(f, x);
+    figure;
+    imshow(a)
+    figure;
+    imshow(b)
+    figure;
+    imshow(c)
+    figure;
+    imshow(d)
+    figure;
+    imshow(e)
+    figure;
+    imshow(f)
+% else
+%     [a,b,c,d,e,f,g] = getAllLettersW(img);
+%     figure;
+%     imshow(a)
+%     figure;
+%     imshow(b)
+%     figure;
+%     imshow(c)
+%     figure;
+%     imshow(d)
+%     figure;
+%     imshow(e)
+%     figure;
+%     imshow(f)
+%     figure;
+%     imshow(g)
 % end
-% hold off;
-% im2 = imfill(labelImage);
-% st2 = regionprops( im2, 'Area', 'BoundingBox' );
-% [a b] = max([st2.Area]);
-%figure;
-%imshow()
 end
