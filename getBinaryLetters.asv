@@ -1,0 +1,26 @@
+function getBinaryLetters(image)
+%Array to store the result of every character
+resultsArray = zeros(36,1);
+%Array keepi
+charArray = [char(65:90) char(48:57)];
+for i=1:36
+    string = 'lettersNumbers/';
+    current = charArray(i);
+    string = strcat(string,current);
+    string = strcat(string,'.PNG');
+    
+    im = imread(string);
+    gray = rgb2gray(im);
+    bin = gray & 1;
+    white = bin == 0;
+    
+    resizedImage = resizeImage(white, image, gray);
+    diff = double(image) - double(resizedImage);
+    %[hist, bin] = diphist(diff, [1, 255], 255);
+    %stem(bin, hist);
+    resultsArray(i) = diff(1);
+end    
+end
+
+
+

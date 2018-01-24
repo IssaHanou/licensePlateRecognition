@@ -3,7 +3,7 @@ function processImage
 % dipimage;
 
 %Read the input image
-image = imread('images/2.jpg');
+image = imread('images/1.jpg');
 img = imresize(image,[400 NaN]); %Resize the image (as it is too big)
 
 %Execute getPlate with the image
@@ -21,6 +21,6 @@ img = rotImage(grayCrop);
 
 %Execute getAllLetters with the rotated image
 [a,b,c,d,e,f,gray] = getAllLettersY(img);
-imshow(img);
-licensePlate = getLicensePlate(a,b,c,d,e,f,gray)
+array = [a,b,c,d,e,f];
+licensePlate = getLicensePlate([a b c d e f], gray);
 end

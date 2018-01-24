@@ -1,0 +1,19 @@
+function licensePlate = getLicensePlate(a,b,c,d,e,f,gray)
+a = toBinary(a, gray);
+b = toBinary(b, gray);
+c = toBinary(c, gray);
+d = toBinary(d, gray);
+e = toBinary(e, gray);
+f = toBinary(f, gray);
+letterA = detectLetter(a);
+letterB = detectLetter(b);
+letterC = detectLetter(c);
+letterD = detectLetter(d);
+letterE = detectLetter(e);
+letterF = detectLetter(f);
+licensePlate = strcat(letterA,letterB);
+licensePlate = strcat(licensePlate,letterC);
+licensePlate = strcat(licensePlate,letterD);
+licensePlate = strcat(licensePlate,letterE);
+licensePlate = strcat(licensePlate,letterF);
+end
