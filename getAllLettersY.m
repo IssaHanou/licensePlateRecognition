@@ -15,25 +15,37 @@ for x=60:5:160 % Value x differs per image
                 if figures == 0
                 a = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                 sizea = array(n+2) * array(n+3);
+                enda = array(n) + array(n+2);
                 elseif figures == 1
                 b = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                 sizeb = array(n+2) * array(n+3);
+                endb = array(n) + array(n+2);
+                startb = array(n);
                 elseif figures == 2
                 c = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                 sizec = array(n+2) * array(n+3);
+                startc = array(n);
+                endc = array(n) + array(n+2);
                 elseif figures == 3
                 d = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                 sized = array(n+2) * array(n+3);
+                startd = array(n);
+                endd = array(n) + array(n+2);
                 elseif figures == 4
                 e = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                 sizee = array(n+2) * array(n+3);
+                starte = array(n);
+                ende = array(n) + array(n+2);
                 elseif figures == 5
                 f = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                 sizef = array(n+2) * array(n+3);
+                startf = array(n);
                 end
                 figures = figures + 1;
                 if figures == 6
                 sizes = [sizea sizeb sizec sized sizee sizef];
+                dist = [startb-enda startc-endb startd-endc starte-endd startf-ende];
+                
                 small = min(sizes);
                 big = max(sizes);
                 if (big/small < 1.5)
