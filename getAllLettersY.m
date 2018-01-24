@@ -1,4 +1,4 @@
-function [a,b,c,d,e,f] = getAllLettersY(grayImg);
+function [a,b,c,d,e,f,x] = getAllLettersY(grayImg);
 img2 = grayImg;
 for x=60:5:160 % Value x differs per image
     figures = 0;

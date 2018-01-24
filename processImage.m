@@ -22,8 +22,13 @@ figure;
 imshow(grayCrop)
 %Execute getAllLetters with the rotated image
 % if y < 250
-    [a,b,c,d,e,f] = getAllLettersY(img);
-    g = 0;
+    [a,b,c,d,e,f,x] = getAllLettersY(img);
+    a = toBinary(a, x);
+    b = toBinary(b, x);
+    c = toBinary(c, x);
+    d = toBinary(d, x);
+    e = toBinary(e, x);
+    f = toBinary(f, x);
     figure;
     imshow(a)
     figure;
