@@ -78,6 +78,9 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in push  button1.
 function pushbutton1_Callback(hObject, eventdata, handles)
+%Clear the handles with the frame
+cla(handles.axes2);
+
 %Read in the video
 vidObj = VideoReader('project files/TrainingVideo.avi');
 handles.output = hObject;
@@ -97,12 +100,12 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 frameCount = 1;
 timeStamps = [];
 set(handles.uitable2, 'Data', {});
-axes(handles.axes3);
+axes(handles.axes2);
 
 %Keep getting frames till no more frames are left
 while(hasFrame(handles.vidObj))
     vidFrame = readFrame(handles.vidObj);
-    h = get(handles.axes3, 'Children');
+    h = get(handles.axes1, 'Children');
     set(h, 'CData', vidFrame);
     guidata(hObject,handles);
     
@@ -121,7 +124,6 @@ while(hasFrame(handles.vidObj))
     %end
     frameCount = frameCount + 1;
 end
-
 %Get the output from the table
 tableData = get(handles.uitable2, 'Data');
 %results = getFinalData(tableData);
