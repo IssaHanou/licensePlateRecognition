@@ -28,6 +28,10 @@ for i=1:length(charArray)
 end    
 [minChar,index] = min(resultsArray);
 letter = charArray(index);
+
+if letter == 'B'
+    letter = checkB(image, resultsArray);
+end
 end
 
 

@@ -1,4 +1,4 @@
-function [a,b,c,d,e,f,factor,pos1,pos2] = getAllLettersY(grayImg);
+function [a,b,c,d,e,f,factor,pos1,pos2] = getAllLettersY(grayImg)
 a = -1;
 b = -1;
 c = -1;
@@ -24,6 +24,7 @@ for factor=40:10:160 % Value x differs per image
                 if figures == 0
                     %Crop the image to get the letter
                     a = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
+                    coora = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                     %Calculate the size of the image
                     imageSizes(1) = array(n+2) * array(n+3);
                     %The x coordinate of the right down corner
@@ -31,27 +32,32 @@ for factor=40:10:160 % Value x differs per image
                 elseif figures == 1
                     b = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(2) = array(n+2) * array(n+3);
+                    coorb = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                     endb = array(n)+array(n+2);
                     %The x coordinate of the left down corner
                     startb = array(n);
                 elseif figures == 2
                     c = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(3) = array(n+2) * array(n+3);
+                    coorc = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                     endc = array(n)+array(n+2);
                     startc = array(n);
                 elseif figures == 3
                     d = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(4) = array(n+2) * array(n+3);
+                    coord = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                     endd = array(n)+array(n+2);
                     startd = array(n);
                 elseif figures == 4
                     e = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(5) = array(n+2) * array(n+3);
+                    coore = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                     ende = array(n)+array(n+2);
                     starte = array(n);
                 elseif figures == 5
                     f = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(6) = array(n+2) * array(n+3);
+                    coorf = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                     startf = array(n);
                 end
                 figures = figures + 1;
@@ -61,14 +67,19 @@ for factor=40:10:160 % Value x differs per image
                     %Get the one with the biggest distance to get the
                     %stripe
                     [~,pos1] = max(dist);
-                    dist(pos1) = 0;
                     %The position of the first stripe
-                    pos1 = pos1 + 1;
+                    dist(pos1) = 0;
                     %Now get the second biggest distance to get the second
                     %stripe
                     [~, pos2] = max(dist);
                     %The position of the second stripe
-                    pos2 = pos2 + 2;
+                    if(pos1 < pos2)
+                        pos1 = pos1 + 1;
+                        pos2 = pos2 + 2;
+                    else
+                        pos1 = pos1 + 2;
+                        pos2 = pos2 + 1;
+                    end
                     %Get the smallest icon
                     small = min(imageSizes);
                     %Get the biggest icon

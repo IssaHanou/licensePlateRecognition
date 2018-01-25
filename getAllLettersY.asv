@@ -1,4 +1,4 @@
-function [a,b,c,d,e,f,factor,pos1,pos2] = getAllLettersY(grayImg);
+function [a,b,c,d,e,f,factor,pos1,pos2] = getAllLettersY(grayImg)
 a = -1;
 b = -1;
 c = -1;
@@ -24,6 +24,7 @@ for factor=40:10:160 % Value x differs per image
                 if figures == 0
                     %Crop the image to get the letter
                     a = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
+                    coor
                     %Calculate the size of the image
                     imageSizes(1) = array(n+2) * array(n+3);
                     %The x coordinate of the right down corner
@@ -62,11 +63,19 @@ for factor=40:10:160 % Value x differs per image
                     %stripe
                     [~,pos1] = max(dist);
                     dist(pos1) = 0;
+                    %The position of the first stripe
                     pos1 = pos1 + 1;
+                    %Now get the second biggest distance to get the second
+                    %stripe
                     [~, pos2] = max(dist);
+                    %The position of the second stripe
                     pos2 = pos2 + 2;
+                    %Get the smallest icon
                     small = min(imageSizes);
+                    %Get the biggest icon
                     big = max(imageSizes);
+                    %Check if the smallest and the biggest icon don't
+                    %differ too much
                     if (big/small < 1.5)
                         break;
                     else
