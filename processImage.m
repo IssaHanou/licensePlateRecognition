@@ -2,9 +2,6 @@ function licensePlate = processImage(image)
 % run('GUI/dipstart.m');
 % dipimage;
 
-%Read the input image
-%image = imread('images/1.jpg');
-
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
 
@@ -24,6 +21,7 @@ imshow(img);
 
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,gray,value,xcoorletters] = getAllLettersY(img);
+
 
 %Get the position of the stripes in the license plate
 [pos1, pos2] = getStripes(img, gray, value, xcoorletters);

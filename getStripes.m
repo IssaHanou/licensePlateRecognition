@@ -10,7 +10,7 @@ array = [st.BoundingBox];
 %If length smaller than 4, there are no boxes
 if ~isempty(value) && ~isempty(xcoorletters)
     for n=1:4:length(array)
-        if(array(n+1) > value(2) && array(n+1)< value(2)+value(4) && array(n)>value(1) && array(n)<value(5) && array(n+2)<(value(3)/2))
+        if(array(n+1) > (value(2)+((value(4)/10)*3)) && array(n+1)< value(2)+value(4) && array(n)>value(1) && array(n)<value(5) && array(n+2)<(value(3)/2))   
             for(k=2:length(xcoorletters))
                 if(array(n) > xcoorletters(1))
                     if(array(n) < xcoorletters(k))
@@ -19,7 +19,6 @@ if ~isempty(value) && ~isempty(xcoorletters)
                         else
                             pos2 = k;
                         end
-                        break;
                     end
                 end
             end

@@ -109,7 +109,7 @@ while(hasFrame(handles.vidObj))
     %Add current time to the timeStamps array
     timeStamps(end+1) = handles.vidObj.CurrentTime;
     
-    %if (mod(frameCount,10) == 0)        %Do only if you want less frames
+    if (mod(frameCount,3) == 0)        %Do only if you want less frames
         newPlate = processImage(vidFrame);
         
         %Get old data from the table
@@ -118,7 +118,7 @@ while(hasFrame(handles.vidObj))
         %Add the new plate to the table data
         newData = [data; {newPlate, frameCount, timeStamps(frameCount)}];
         set(handles.uitable2, 'Data', newData); 
-    %end
+    end
     frameCount = frameCount + 1;
 end
 
