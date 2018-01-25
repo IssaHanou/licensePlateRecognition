@@ -1,7 +1,4 @@
-function licensePlate = processImage(image)
-% run('GUI/dipstart.m');
-% dipimage;
-
+function [licensePlateString, licensePlateImage] = processImage(image)
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
 
@@ -17,8 +14,14 @@ colorCrop = imcrop(img,coor);
 
 %Execute rotImage with the cropped image
 img = rotImage(grayCrop);
-imshow(img);
-
+blackpart = img < 150;
+if sum(sum(blackpart)) < 10000
+    licensePlateImage = '';
+    licensePlateString = '';
+    return;
+else 
+    licensePlateImage = img;
+end
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,gray,value,xcoorletters] = getAllLettersY(img);
 
@@ -31,5 +34,9 @@ gray = gray + 10; %Threshold to be surer to get the right letters.
 letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray);
 
 %Get the license plate string
-licensePlate = createLicensePlate(letterArray,pos1,pos2);
+licensePlateString = createLicensePlate(letterArray,pos1,pos2);
+
+if length(unique(licensePlateString)) < 4
+    licensePlateString = '';
+end
 end

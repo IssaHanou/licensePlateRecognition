@@ -1,17 +1,6 @@
-function licensePlate = processImage(image)
-% run('GUI/dipstart.m');
-% dipimage;
-
-%Read the input image
-<<<<<<< HEAD
-%image = imread('images/1.jpg');
-
+function [licensePlateString, licensePlateImage] = processImage(image)
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
-=======
-image = imread('images/5.jpg');
-img = imresize(image,[400 NaN]); %Resize the image (as it is too big)
->>>>>>> 61864f231029349147f633206668c3faaf64db01
 
 %Execute getPlate with the image
 plate = getPlate(img); 
@@ -25,34 +14,26 @@ colorCrop = imcrop(img,coor);
 
 %Execute rotImage with the cropped image
 img = rotImage(grayCrop);
-imshow(img);
+blackpart = img < 150;
+if sum(sum(blackpart)) < 10000
+    licensePlateImage = ''l
+licensePlateImage = img;
 
 %Execute getAllLetters with the rotated image
-<<<<<<< HEAD
-[imageArray,gray,value,xcoorletters] = getAllLettersY(img, 6);
+[img1,img2,img3,img4,img5,img6,gray,value,xcoorletters] = getAllLettersY(img);
+
 
 %Get the position of the stripes in the license plate
 [pos1, pos2] = getStripes(img, gray, value, xcoorletters);
 gray = gray + 10; %Threshold to be surer to get the right letters.
 
 %Get the characters of every letter/number in the license plate
-letterArray = getPlateChars(imageArray,gray);
+letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray);
 
 %Get the license plate string
-licensePlate = createLicensePlate(letterArray,pos1,pos2);
-=======
-[a,b,c,d,e,f,gray,value,xcoorletters] = getAllLettersY(img);
+licensePlateString = createLicensePlate(letterArray,pos1,pos2);
 
-
-%Get the position of the stripes in the license plate
-[pos1, pos2] = getStripes(img, gray,value, xcoorletters);
-gray = gray+10;
-%Get the characters of every letter/number in the license plate
-[a,b,c,d,e,f] = getPlateChars(a,b,c,d,e,f,gray);
-
-%Get the license plate string
-licensePlate = createLicensePlate(a,b,c,d,e,f,pos1,pos2);
-
-display(licensePlate);
->>>>>>> 61864f231029349147f633206668c3faaf64db01
+if length(unique(licensePlateString)) < 4
+    licensePlateString = '';
+end
 end

@@ -67,7 +67,7 @@ for factor=60:5:160
                     small = min(imageSizes);
                     big = max(imageSizes);
                     if (big/small < 1.5)
-                        break;
+                        return;
                     else
                         figures = 0;
                     end
@@ -76,9 +76,9 @@ for factor=60:5:160
         end
     end
     if figures == 6
-        break;
+        return;
     end
-end
+%end
 if length(value) < 5
     value = [];
 end

@@ -1,9 +1,11 @@
 function letter = detectLetter(image)
+%Array keeping al characters to check against.
+charArray = getPossibleChars(4);
+
 %Array to store the result of every character
-resultsArray = zeros(36,1);
-%Array keeping al character to check against.
-charArray = [char(65:90) char(48:57)];
-for i=1:36
+resultsArray = zeros(length(charArray),1);
+
+for i=1:length(charArray)
     %Create file name string
     string = 'lettersNumbers/';
     current = charArray(i);

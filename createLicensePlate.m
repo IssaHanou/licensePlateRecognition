@@ -18,7 +18,7 @@ else
     if pos1 > 0
         if pos2 > 0
             range = length(letterArray) + 2;
-            pos2 = pos2 + 1;
+            %pos2 = pos2 + 1;
         else 
             range = length(letterArray) + 1;
         end
