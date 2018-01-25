@@ -1,57 +1,76 @@
-function [a,b,c,d,e,f,factor,value, xcoorletters] = getAllLettersY(grayImg);
-img2 = grayImg;
-for factor=60:5:160 % Value x differs per image
+function [img1,img2,img3,img4,img5,img6,factor,value,xcoorletters] = getAllLettersY(grayImage)
+%Start with -1 values, they are assigned to images if possible 
+img1 = -1;
+img2 = -1;
+img3 = -1;
+img4 = -1;
+img5 = -1;
+img6 = -1;
+value = [];
+xcoorletters = [];
+
+%Keep boundingBoxArray with sizes of the images found
+imageSizes = [];
+
+%Loop over gray scale values to get clearest character images.
+for factor=60:5:160
     figures = 0;
-    img = grayImg;
+    img = grayImage;
     img(img > factor) = 0; %Put everything higher than x on grayscale to black
     img(img > 0) = 255; %Put the rest to white
     b = img&1; %Make binary image
     st = regionprops(b, 'Area', 'BoundingBox'); 
-    array = [st.BoundingBox]; %Get an array of all bounding boxes
-    for n=1:4:length(array) %Go through the array, but skip 4 as each 4 numbers are the corners of the bounding box
-        if(array(n+3) > 10)
-            if((array(n+3)/array(n+2)) >= 1.3 && (array(n+3)/array(n+2))<=3)
-                z=2;
+    boundingBoxArray = [st.BoundingBox]; %Get an boundingBoxArray of all bounding boxes
+    z=2;
+
+    %Go through the boundingBoxArray, but skip 4 as each 4 numbers are 
+    %the corners of the bounding box
+    for n=1:4:length(boundingBoxArray) 
+        %If the height of the character is larger than 10
+        if(boundingBoxArray(n+3) > 10) 
+            %The width/height ratio must be in the right range to be a
+            %character on a license plate
+            if((boundingBoxArray(n+3)/boundingBoxArray(n+2)) >= 1.3 && (boundingBoxArray(n+3)/boundingBoxArray(n+2))<=3) 
                 if figures == 0
-                a = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
-                sizea = array(n+2) * array(n+3);
-                value(1) = array(n);
-                value(2) = array(n+1);
-                value(3) = array(n+2);
-                value(4) = array(n+3);
-                xcoorletters(1) = array(n);
+                    img1 = imcrop(grayImage, [boundingBoxArray(n)-z boundingBoxArray(n+1)-z boundingBoxArray(n+2)+(2*z) boundingBoxArray(n+3)+(2*z)]);
+                    imageSizes(end+1)= boundingBoxArray(n+2) * boundingBoxArray(n+3);
+                    value(1) = boundingBoxArray(n);
+                    value(2) = boundingBoxArray(n+1);
+                    value(3) = boundingBoxArray(n+2);
+                    value(4) = boundingBoxArray(n+3);
+                    xcoorletters(1) = boundingBoxArray(n);
                 elseif figures == 1
-                b = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
-                sizeb = array(n+2) * array(n+3);
-                xcoorletters(2) = array(n)+(array(n+2)/2);
+                    img2 = imcrop(grayImage, [boundingBoxArray(n)-z boundingBoxArray(n+1)-z boundingBoxArray(n+2)+(2*z) boundingBoxArray(n+3)+(2*z)]);
+                    imageSizes(end+1) = boundingBoxArray(n+2) * boundingBoxArray(n+3);
+                    xcoorletters(2) = boundingBoxArray(n)+(boundingBoxArray(n+2)/2);
                 elseif figures == 2
-                c = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
-                sizec = array(n+2) * array(n+3);
-                xcoorletters(3) = array(n)+(array(n+2)/2);
+                    img3 = imcrop(grayImage, [boundingBoxArray(n)-z boundingBoxArray(n+1)-z boundingBoxArray(n+2)+(2*z) boundingBoxArray(n+3)+(2*z)]);
+                    imageSizes(end+1) = boundingBoxArray(n+2) * boundingBoxArray(n+3);
+                    xcoorletters(3) = boundingBoxArray(n)+(boundingBoxArray(n+2)/2);
                 elseif figures == 3
-                d = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
-                sized = array(n+2) * array(n+3);
-                xcoorletters(4) = array(n)+(array(n+2)/2);
+                    img4 = imcrop(grayImage, [boundingBoxArray(n)-z boundingBoxArray(n+1)-z boundingBoxArray(n+2)+(2*z) boundingBoxArray(n+3)+(2*z)]);
+                    imageSizes(end+1) = boundingBoxArray(n+2) * boundingBoxArray(n+3);
+                    xcoorletters(4) = boundingBoxArray(n)+(boundingBoxArray(n+2)/2);
                 elseif figures == 4
-                e = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
-                sizee = array(n+2) * array(n+3);
-                xcoorletters(5) = array(n)+(array(n+2)/2);
+                    img5 = imcrop(grayImage, [boundingBoxArray(n)-z boundingBoxArray(n+1)-z boundingBoxArray(n+2)+(2*z) boundingBoxArray(n+3)+(2*z)]);
+                    imageSizes(end+1) = boundingBoxArray(n+2) * boundingBoxArray(n+3);
+                    xcoorletters(5) = boundingBoxArray(n)+(boundingBoxArray(n+2)/2);
                 elseif figures == 5
-                f = imcrop(img2, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
-                sizef = array(n+2) * array(n+3);
-                value(5) = array(n);
-                xcoorletters(6) = array(n)+(array(n+2));
+                    img6 = imcrop(grayImage, [boundingBoxArray(n)-z boundingBoxArray(n+1)-z boundingBoxArray(n+2)+(2*z) boundingBoxArray(n+3)+(2*z)]);
+                    imageSizes(end+1) = boundingBoxArray(n+2) * boundingBoxArray(n+3);
+                    value(5) = boundingBoxArray(n);
+                    xcoorletters(6) = boundingBoxArray(n)+(boundingBoxArray(n+2));
                 end
                 figures = figures + 1;
+                %If there are mismatching images, try again
                 if figures == 6
-                sizes = [sizea sizeb sizec sized sizee sizef];
-                small = min(sizes);
-                big = max(sizes);
-                if (big/small < 1.5)
-                break;
-                else
-                figures = 0;
-                end
+                    small = min(imageSizes);
+                    big = max(imageSizes);
+                    if (big/small < 1.5)
+                        break;
+                    else
+                        figures = 0;
+                    end
                 end
             end
         end
@@ -59,5 +78,8 @@ for factor=60:5:160 % Value x differs per image
     if figures == 6
         break;
     end
+end
+if length(value) < 5
+    value = [];
 end
 end

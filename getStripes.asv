@@ -8,7 +8,7 @@ st = regionprops(binaryImg, 'Area', 'BoundingBox');
 array = [st.BoundingBox];
 
 %If length smaller than 4, there are no boxes
-if ~isempty(value) && ~isempty(xcoorletters)
+if ~isempty(value) && ~isempty(value)
     for n=1:4:length(array)
         if(array(n+1) > value(2) && array(n+1)< value(2)+value(4) && array(n)>value(1) && array(n)<value(5) && array(n+2)<(value(3)/2))
             for(k=2:length(xcoorletters))
@@ -16,8 +16,7 @@ if ~isempty(value) && ~isempty(xcoorletters)
                     if(array(n) < xcoorletters(k))
                         if(pos1 == 0)
                             pos1 = k;
-                        else
-                            pos2 = k;
+                        else pos2 = k;
                         end
                         break;
                     end

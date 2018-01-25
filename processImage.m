@@ -1,10 +1,12 @@
-function processImage
+function licensePlate = processImage(image)
 % run('GUI/dipstart.m');
 % dipimage;
 
 %Read the input image
-image = imread('images/1.jpg');
-img = imresize(image,[400 NaN]); %Resize the image (as it is too big)
+%image = imread('images/1.jpg');
+
+%Resize the image (as it is too big)
+img = imresize(image,[400 NaN]); 
 
 %Execute getPlate with the image
 plate = getPlate(img); 
@@ -21,16 +23,15 @@ img = rotImage(grayCrop);
 imshow(img);
 
 %Execute getAllLetters with the rotated image
-[a,b,c,d,e,f,gray,value,xcoorletters] = getAllLettersY(img);
+[img1,img2,img3,img4,img5,img6,gray,value,xcoorletters] = getAllLettersY(img);
 
 %Get the position of the stripes in the license plate
-[pos1, pos2] = getStripes(img, gray,value, xcoorletters);
+[pos1, pos2] = getStripes(img, gray, value, xcoorletters);
+gray = gray + 10; %Threshold to be surer to get the right letters.
 
 %Get the characters of every letter/number in the license plate
-[a,b,c,d,e,f] = getPlateChars(a,b,c,d,e,f,gray);
+letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray);
 
 %Get the license plate string
-licensePlate = createLicensePlate(a,b,c,d,e,f,pos1,pos2);
-
-display(licensePlate);
+licensePlate = createLicensePlate(letterArray,pos1,pos2);
 end

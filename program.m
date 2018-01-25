@@ -78,14 +78,16 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in push  button1.
 function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+%Clear the handles with the frame
+cla(handles.axes2);
+
+%Read in the video
 vidObj = VideoReader('project files/TrainingVideo.avi');
 handles.output = hObject;
 handles.vidObj = vidObj;
 guidata(hObject,handles);
 
+%Put the video in the axes
 axes(handles.axes1);
 data = readFrame(handles.vidObj);
 h = get(handles.axes1, 'Children');
@@ -94,32 +96,45 @@ image(data);
 
 % --- Executes on button press in pushbutton3.
 function pushbutton3_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)while hasFrame(handles.vidObj)
+%Start the frameCount, keep empty timeStamp array, start the table empty
 frameCount = 1;
 timeStamps = [];
-set(handles.uitable1, 'Data', {});
+set(handles.uitable2, 'Data', {});
+
+%Keep getting frames till no more frames are left
 while(hasFrame(handles.vidObj))
+    %Switch to the video axes and read frame.
+    axes(handles.axes2);
     vidFrame = readFrame(handles.vidObj);
     h = get(handles.axes1, 'Children');
     set(h, 'CData', vidFrame);
     guidata(hObject,handles);
+    
+    %Add current time to the timeStamps array
     timeStamps(end+1) = handles.vidObj.CurrentTime;
-    %newPlate = processImage(vidFrame);
-    data = get(handles.uitable1, 'Data');
-    newData = [data; {'AB-02-DK', frameCount, timeStamps(frameCount)}];
-    set(handles.uitable1, 'Data', newData); 
+    
+    %if (mod(frameCount,10) == 0)        %Do only if you want less frames
+        newPlate = processImage(vidFrame);
+        
+        %Get old data from the table
+        data = get(handles.uitable2, 'Data');
+        
+        %Add the new plate to the table data
+        newData = [data; {newPlate, frameCount, timeStamps(frameCount)}];
+        
+        %Put new data in the table, show the current plate frame
+        axes(handles.axes1);
+        imshow(vidFrame);
+        set(handles.uitable2, 'Data', newData); 
+    %end
     frameCount = frameCount + 1;
-    pause(1);
 end
+%Get the output from the table
+tableData = get(handles.uitable2, 'Data');
+%results = getFinalData(tableData);
+checkSolution(tableData, 'project files/trainingSolutions.mat');
 
 % --- Executes when user attempts to close figure1.
 function figure1_CloseRequestFcn(hObject, eventdata, handles)
-% hObject    handle to figure1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: delete(hObject) closes the figure
-stop(handles.vid);
+% Close the figure and delete its contents
 delete(hObject);
