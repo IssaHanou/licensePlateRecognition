@@ -1,4 +1,5 @@
 function [licensePlateString, licensePlateImage] = processImage(image)
+%image = imread('images/8.jpg');
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
 
@@ -24,10 +25,10 @@ else
     licensePlateImage = img;
 end
 %Execute getAllLetters with the rotated image
-[img1,img2,img3,img4,img5,img6,gray,value,xcoorletters] = getAllLettersY(img);
+[img1,img2,img3,img4,img5,img6,gray,pos1,pos2] = getAllLettersY(img);
 
 %Get the position of the stripes in the license plate
-[pos1, pos2] = getStripes(img, gray, value, xcoorletters);
+%[pos1, pos2] = getStripes(img, gray, value, xcoorletters);
 gray = gray + 10; %Threshold to be surer to get the right letters.
 
 %Get the characters of every letter/number in the license plate

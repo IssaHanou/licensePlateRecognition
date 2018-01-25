@@ -57,8 +57,8 @@ for factor=40:10:160 % Value x differs per image
                     [M,pos1] = max(dist);
                     dist(pos1) = 0;
                     pos1 = pos1 + 1;
+                    
                     [M, pos2] = max(dist);
-                    pos2 = pos2 + 2;
                     small = min(imageSizes);
                     big = max(imageSizes);
                     if (big/small < 1.5)

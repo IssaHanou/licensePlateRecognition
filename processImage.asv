@@ -1,4 +1,5 @@
-function [licensePlateString, licensePlateImage] = processImage(image)
+%function [licensePlateString, licensePlateImage] = processImage(image)
+
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
 
@@ -39,8 +40,9 @@ licensePlateString = createLicensePlate(letterArray,pos1,pos2);
 %If there are not two stripes in a license plate don't return one
 if strfind(licensePlateString,'-') <= 1
     licensePlateString = '';
-%If there are more than 2 of the same character
-elseif length(unique(licensePlateString)) < 6
+%If there are more than 2 of the same character (except for -) return
+%nothing
+elseif length(unique(licensePlateString)) < 5
     licensePlateString = '';
 end
 end
