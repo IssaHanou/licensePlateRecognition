@@ -16,7 +16,7 @@ colorCrop = imcrop(img,coor);
 img = rotImage(grayCrop);
 %Only continue if there is a plate in the image
 blackpart = img < 150;
-if sum(sum(blackpart)) < 8000
+if sum(sum(blackpart)) < 6000
     licensePlateImage = '';
     licensePlateString = '';
     return;
@@ -35,6 +35,7 @@ letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray);
 
 %Get the license plate string
 licensePlateString = createLicensePlate(letterArray,pos1,pos2);
+display(licensePlateString);
 
 %If there are not two stripes in a license plate don't return one
 if strfind(licensePlateString,'-') <= 1
