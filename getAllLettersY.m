@@ -17,19 +17,22 @@ for factor=40:10:160 % Value x differs per image
     b = img&1; %Make binary image
     st = regionprops(b, 'Area', 'BoundingBox'); 
     array = [st.BoundingBox]; %Get an array of all bounding boxes
-    
     for n=1:4:length(array) %Go through the array, but skip 4 as each 4 numbers are the corners of the bounding box
-        if(array(n+3) > 10)
-            if((array(n+3)/array(n+2)) >= 1.3 && (array(n+3)/array(n+2))<=3)
-                z=2;
+        if(array(n+3) > 10) %Only get the areas which are higher than 10 pixels
+            if((array(n+3)/array(n+2)) >= 1.3 && (array(n+3)/array(n+2))<=3) %Check if the dimensions are good
+                z=2; %Add 2 pixels to the bounding boxes
                 if figures == 0
+                    %Crop the image to get the letter
                     a = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
+                    %Calculate the size of the image
                     imageSizes(1) = array(n+2) * array(n+3);
+                    %The x coordinate of the right down corner
                     enda = array(n)+array(n+2);
                 elseif figures == 1
                     b = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(2) = array(n+2) * array(n+3);
                     endb = array(n)+array(n+2);
+                    %The x coordinate of the left down corner
                     startb = array(n);
                 elseif figures == 2
                     c = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
@@ -52,15 +55,26 @@ for factor=40:10:160 % Value x differs per image
                     startf = array(n);
                 end
                 figures = figures + 1;
-                if figures == 6
+                if figures == 6 %If it has all 6 icons...
+                    %Calculate the distance between the icons
                     dist = [startb-enda startc-endb startd-endc starte-endd startf-ende];
-                    [M,pos1] = max(dist);
+                    %Get the one with the biggest distance to get the
+                    %stripe
+                    [~,pos1] = max(dist);
                     dist(pos1) = 0;
+                    %The position of the first stripe
                     pos1 = pos1 + 1;
-                    [M, pos2] = max(dist);
+                    %Now get the second biggest distance to get the second
+                    %stripe
+                    [~, pos2] = max(dist);
+                    %The position of the second stripe
                     pos2 = pos2 + 2;
+                    %Get the smallest icon
                     small = min(imageSizes);
+                    %Get the biggest icon
                     big = max(imageSizes);
+                    %Check if the smallest and the biggest icon don't
+                    %differ too much
                     if (big/small < 1.5)
                         break;
                     else

@@ -26,6 +26,8 @@ else
 end
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,gray,pos1,pos2] = getAllLettersY(img);
+
+%Check if the stripes are at a logical position
 if ~and(pos1==3,pos2==7) && ~and(pos1==3,pos2==6) && ~and(pos1==2,pos2==6)
     licensePlateImage = '';
     licensePlateString = '';
