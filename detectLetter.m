@@ -27,7 +27,7 @@ for i=1:length(charArray)
     resultsArray(i) = hist(1);
 end    
 [minChar,index] = min(resultsArray);
-letter = charArray(index)
+letter = charArray(index);
 
 if letter == 'B'
     letter = checkB(image, resultsArray);

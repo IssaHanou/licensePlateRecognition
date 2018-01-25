@@ -1,4 +1,4 @@
-function [a,b,c,d,e,f,factor,pos1,pos2] = getAllLettersY(grayImg)
+function [a,b,c,d,e,f,factor,pos1,pos2] = getAllLettersY(grayImg);
 a = -1;
 b = -1;
 c = -1;
@@ -53,12 +53,12 @@ for factor=40:10:160 % Value x differs per image
                 end
                 figures = figures + 1;
                 if figures == 6
-                    distances = [startb-enda startc-endb startd-endc starte-endd startf-ende];
-                    [M,pos1] = max(distances);
-                    distances(pos1) = 0;
+                    dist = [startb-enda startc-endb startd-endc starte-endd startf-ende];
+                    [M,pos1] = max(dist);
+                    dist(pos1) = 0;
                     pos1 = pos1 + 1;
-                    [M, pos2] = max(distances);
-                    pos2 = pos2 + 2;
+                    
+                    [M, pos2] = max(dist);
                     small = min(imageSizes);
                     big = max(imageSizes);
                     if (big/small < 1.5)
