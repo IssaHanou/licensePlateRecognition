@@ -16,29 +16,34 @@ colorCrop = imcrop(img,coor);
 %Execute rotImage with the cropped image
 img = rotImage(grayCrop);
 licensePlateImage = img;
+imshow(img);
 
 %Only continue if there is a plate in the image
-blackpart = img < 150;
-if sum(sum(blackpart)) < 6000
+[y,x] = size(img);
+if x < 100 
     licensePlateString = '';
-    return;
+    return
 end
 
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,gray,pos1,pos2] = getAllLettersY(img);
 gray = gray + 10; %Threshold to be surer to get the right letters.
+display([pos1, pos2]);
+
+%If the stripe positions are not in the right place, don't return
+if ~and(pos1==3,pos2==7) && ~and(pos1==3,pos2==6) && ~and(pos1==2,pos2==6)
+    licensePlateString = '';
+    return
+end
 
 %Get the characters of every letter/number in the license plate
 letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray);
 
 %Get the license plate string
-licensePlateString = createLicensePlate(letterArray,pos1,pos2);
+licensePlateString = createLicensePlate(letterArray,pos1,pos2)
 
 %If there are not two stripes in a license plate don't return one
 if strfind(licensePlateString,'-') <= 1
-    licensePlateString = '';
-%If the stripe positions are not in the right place, don't return
-elseif ~and(pos1==3,pos2==7) && ~and(pos1==3,pos2==6) && ~and(pos1==2,pos2==6)
     licensePlateString = '';
 %If there are more than 2 of the same character (except for -) return
 %nothing
