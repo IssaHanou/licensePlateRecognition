@@ -29,10 +29,8 @@ end
 [minChar,index] = min(resultsArray);
 letter = charArray(index);
 
-if letter == 'B' || letter == '8'
-    letter = checkB(image, resultsArray);
-% elseif letter =='1' || letter =='T'
-%     letter = checkT(image, resultsArray);
+if letter == 'B' || letter == '8' || letter == 'T' || letter == '1'
+    letter = checkLetter(letter, image, resultsArray);
 end
 end
 

@@ -8,6 +8,7 @@ starts = [char(66),char(72:74),char(74:76),char(78),char(80),char(82:84),char(86
 nums = char(48:57);
 %b,8,s,3
 bees = [char(66),char(80),char(83),char(56)];
+tees = [char(84), char(49)];
 
 if num == 1
     chars = letters;
@@ -19,5 +20,7 @@ elseif num == 4
     chars = [nums, letters];
 elseif num == 5
     chars = bees;
+elseif num == 6
+    chars = tees;
 end
 end
