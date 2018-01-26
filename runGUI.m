@@ -99,7 +99,7 @@ while(hasFrame(handles.vidObj))
     h = get(handles.axes1, 'Children');
     set(h, 'CData', vidFrame);
     guidata(hObject,handles);
-    
+
     %Add current time to the timeStamps array
     timeStamps(end+1) = handles.vidObj.CurrentTime;
     

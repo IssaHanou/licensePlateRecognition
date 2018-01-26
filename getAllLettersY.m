@@ -103,3 +103,9 @@ for factor=40:10:160 % Value x differs per image
         break;
     end
 end
+if pos1 > pos2
+    tmp = pos1;
+    pos1 = pos2;
+    pos2 = tmp;
+end
+end

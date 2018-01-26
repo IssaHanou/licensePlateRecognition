@@ -1,5 +1,4 @@
-%function [licensePlateString, licensePlateImage] = processImage(image)
-image = imread('images/15.jpg');
+function [licensePlateString, licensePlateImage] = processImage(image)
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
 
@@ -16,6 +15,7 @@ colorCrop = imcrop(img,coor);
 %Execute rotImage with the cropped image
 img = rotImage(grayCrop);
 licensePlateImage = img;
+%imshow(img);
 
 %Only continue if there is a plate in the image
 [y,x] = size(img);
@@ -26,13 +26,12 @@ end
 
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,gray,pos1,pos2] = getAllLettersY(img);
-
-%Get the position of the stripes in the license plate
-%[pos1, pos2] = getStripes(img, gray, value, xcoorletters);
 gray = gray + 10; %Threshold to be surer to get the right letters.
+%display(pos1);
+%display(pos2);
 
 %If the stripe positions are not in the right place, don't return
-if ~and(pos1==3,pos2==7) && ~and(pos1==7,pos2==3) &&~and(pos1==3,pos2==6) && ~and(pos1==6,pos2==3) && ~and(pos1==2,pos2==6) && ~and(pos1==6,pos2==2) 
+if ~and(pos1==3,pos2==7) &&~and(pos1==3,pos2==6) && ~and(pos1==2,pos2==6)
     licensePlateString = '';
     return
 end
@@ -42,15 +41,14 @@ letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray);
 
 %Get the license plate string
 licensePlate = createLicensePlate(letterArray,pos1,pos2)
-licensePlateString = checkLicensePlate(licensePlate, pos1, pos2);
+licensePlateString = checkLicensePlate(licensePlate, pos1, pos2)
 
-%If there are not two stripes in a license plate don't return one
-if strfind(licensePlateString,'-') <= 1
-    licensePlateString = '';
 %If there are more than 2 of the same character (except for -) return
 %nothing
-elseif length(unique(licensePlateString)) < 5
+checkTriples = erase(licensePlateString,'-');
+if length(unique(checkTriples)) < 5
     licensePlateString = '';
 end
+licensePlateString = noNumbers(licensePlateString,pos1,pos2);
 
-%end
+end
