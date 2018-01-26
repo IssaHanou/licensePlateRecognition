@@ -68,8 +68,14 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
+[filename pathname] = uigetfile('*avi', 'Pink AVI file');
+    vidObj = VideoReader(fullfile(pathname, filename));
 %Read in the video
+<<<<<<< HEAD
+%vidObj = VideoReader('Project Files/TrainingVideo.avi');
+=======
 vidObj = VideoReader('Project Files/TrainingVideo.avi');
+>>>>>>> fb6225546717e7acc69521ee4f4a792226006f31
 %vidObj = VideoReader('project files/TrainingSet/Categorie II/Video225.avi');
 handles.output = hObject;
 handles.vidObj = vidObj;
@@ -92,18 +98,19 @@ axes(handles.axes1);
 
 %Keep getting frames till no more frames are left
 while(hasFrame(handles.vidObj))
-    axes(handles.axes1);
+    
     vidFrame = readFrame(handles.vidObj);
-    h = get(handles.axes1, 'Children');
-    set(h, 'CData', vidFrame);
-    guidata(hObject,handles);
+
 
     %Add current time to the timeStamps array
     timeStamps(end+1) = handles.vidObj.CurrentTime;
     
     if (mod(frameCount,5) == 0)        %Do only if you want less frames
         [newPlate, plateImage] = processImage(vidFrame);
-        
+        axes(handles.axes1);
+            h = get(handles.axes1, 'Children');
+    set(h, 'CData', vidFrame);
+    guidata(hObject,handles);
         if ~isempty(newPlate)
             %Get old data from the table
             data = get(handles.uitable1, 'Data');
