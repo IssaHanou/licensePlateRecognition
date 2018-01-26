@@ -1,5 +1,5 @@
-%function [licensePlateString, licensePlateImage] = processImage(image)
-image = imread('images/4.jpg');
+function [licensePlateString, licensePlateImage] = processImage(image)
+%image = imread('images/3.jpg');
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
 
@@ -16,7 +16,6 @@ colorCrop = imcrop(img,coor);
 %Execute rotImage with the cropped image
 img = rotImage(grayCrop);
 licensePlateImage = img;
-imshow(img);
 
 %Only continue if there is a plate in the image
 [y,x] = size(img);
@@ -53,4 +52,4 @@ elseif length(unique(licensePlateString)) < 5
     licensePlateString = '';
 end
 
-%end
+end

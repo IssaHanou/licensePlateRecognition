@@ -69,8 +69,8 @@ varargout{1} = handles.output;
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
 %Read in the video
-%vidObj = VideoReader('project files/TrainingVideo.avi');
-vidObj = VideoReader('project files/TrainingSet/Categorie II/Video225.avi');
+vidObj = VideoReader('Project Files/TrainingSet/Categorie II/Video225.avi');
+%vidObj = VideoReader('project files/TrainingSet/Categorie II/Video225.avi');
 handles.output = hObject;
 handles.vidObj = vidObj;
 guidata(hObject,handles);
@@ -101,7 +101,7 @@ while(hasFrame(handles.vidObj))
     guidata(hObject,handles);
     
     %Add current time to the timeStamps array
-    timeStamps(end+1) = handles.vidObj.CurrentTime + startTime;
+    timeStamps(end+1) = handles.vidObj.CurrentTime;
     
     if (mod(frameCount,5) == 0)        %Do only if you want less frames
         [newPlate, plateImage] = processImage(vidFrame);
@@ -111,7 +111,7 @@ while(hasFrame(handles.vidObj))
             data = get(handles.uitable1, 'Data');
 
             %Add the new plate to the table data
-            newData = [data; {newPlate, frameCount + startFrame, timeStamps(frameCount)}];
+            newData = [data; {newPlate, frameCount, timeStamps(frameCount)}];
             set(handles.uitable1, 'Data', newData); 
         end
     end
