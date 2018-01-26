@@ -1,0 +1,22 @@
+function licensePlate = changeChar(licensePlate, number1, number2, number3)
+nums = getPossibleChars(2);
+   for i=1:8
+        if i ~= number1 && i~= number2
+            if contains(nums,licensePlate(i))
+                if licensePlate(i) == '8' || licensePlate(i) == '3'
+                    licensePlate(i) = 'B';
+                elseif licensePlate(i) == '1'
+                    licensePlate(i) = 'T';
+                elseif licensePlate(i) == '2'
+                    licensePlate(i) = 'Z';
+                elseif licensePlate(i) == '5'
+                    licensePlate(i) = 'J';
+                elseif licensePlate(i) == '9'
+                    licensePlate(i) = 'P'; %or R
+                end
+            end
+        else
+            
+        end
+    end
+end
