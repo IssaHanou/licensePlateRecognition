@@ -17,7 +17,7 @@ number3 = 0;
             licensePlate = changeChar(licensePlate,number1,number2,number3);
         end
     elseif and(pos1==3,pos2==6) 
-        [number1,number2] = getNumbers(licensePlate,pos1,pos2)
+        [number1,number2] = getNumbers(licensePlate,pos1,pos2);
         if number1 ~= 0 && number2 ~= 0
             if number1 == -1 
                 i = number2 - 1;

@@ -40,8 +40,8 @@ end
 letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray);
 
 %Get the license plate string
-licensePlate = createLicensePlate(letterArray,pos1,pos2)
-licensePlateString = checkLicensePlate(licensePlate, pos1, pos2)
+licensePlate = createLicensePlate(letterArray,pos1,pos2);
+licensePlateString = checkLicensePlate(licensePlate, pos1, pos2);
 
 %If there are more than 2 of the same character (except for -) return
 %nothing
