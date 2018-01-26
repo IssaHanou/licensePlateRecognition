@@ -31,6 +31,8 @@ letter = charArray(index);
 
 if letter == 'B' || letter == '8'
     letter = checkB(image, resultsArray);
+% elseif letter =='1' || letter =='T'
+%     letter = checkT(image, resultsArray);
 end
 end
 

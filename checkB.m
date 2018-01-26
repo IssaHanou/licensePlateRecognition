@@ -19,5 +19,4 @@ for i=1:length(chars)
 end
 [~,pos]=min(dist);
 letter = chars(pos);
-letter = 'B';
 end
