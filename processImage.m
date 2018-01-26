@@ -41,7 +41,8 @@ end
 letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray);
 
 %Get the license plate string
-licensePlateString = createLicensePlate(letterArray,pos1,pos2)
+licensePlate = createLicensePlate(letterArray,pos1,pos2)
+licensePlateString = checkLicensePlate(licensePlate, pos1, pos2);
 
 %If there are not two stripes in a license plate don't return one
 if strfind(licensePlateString,'-') <= 1

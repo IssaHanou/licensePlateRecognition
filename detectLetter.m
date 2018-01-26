@@ -20,16 +20,18 @@ for i=1:length(charArray)
     
     %Resize the image to the same size as the image found in the plate
     resizedImage = resizeImage(white, image, gray);
-    diff = double(image) + double(resizedImage);
+    diff = abs(double(image) - double(resizedImage));
     
     %Store the difference in the array at the position of this character
-    [hist, bin] = diphist(diff, [1, 250], 250);
+    [hist, bin] = diphist(diff, [1, 255], 255);
     resultsArray(i) = hist(1);
 end    
 [minChar,index] = min(resultsArray);
 letter = charArray(index);
 
-if letter == 'B' || letter == '8' || letter == 'T' || letter == '1'
+edgeLetters = getPossibleChars(0);
+
+if contains(edgeLetters,letter) == 1
     letter = checkLetter(letter, image, resultsArray);
 end
 end

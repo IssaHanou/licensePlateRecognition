@@ -1,11 +1,7 @@
-function letter = checkLetter(letter,image, resultsArray)
+function letter = checkLetter(letter, image, resultsArray)
 %display(resultsArray);
 [features,vis] = extractHOGFeatures(image);
-if letter == 'B' || '8'
-chars = getPossibleChars(5);
-elseif letter == '1' || 'T'
-chars = getPossobleChars(6); 
-end
+chars = getPossibleChars(0);
 for i=1:length(chars)
     string = 'lettersNumbers/';
     current = chars(i);
