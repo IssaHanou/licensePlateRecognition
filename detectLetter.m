@@ -29,8 +29,10 @@ end
 [minChar,index] = min(resultsArray);
 letter = charArray(index);
 
-if letter == 'B'
-    letter = checkB(image, resultsArray);
+edgeLetters = getPossibleChars(0);
+
+if contains(edgeLetters,letter) == 1
+    letter = checkLetter(letter, image, resultsArray);
 end
 end
 
