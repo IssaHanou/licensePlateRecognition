@@ -1,5 +1,5 @@
-function [licensePlateString, licensePlateImage] = processImage(image)
-%image = imread('images/3.jpg');
+%function [licensePlateString, licensePlateImage] = processImage(image)
+image = imread('images/15.jpg');
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
 
@@ -52,4 +52,4 @@ elseif length(unique(licensePlateString)) < 5
     licensePlateString = '';
 end
 
-end
+%end

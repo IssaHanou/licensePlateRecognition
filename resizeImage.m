@@ -1,6 +1,6 @@
-function resizedImage = resizeImage(imageToResize, imageRightSize, gray)
+function resizedImage = resizeImage(imageToResize, imageRightSize, imageRightSizeGray)
 z=2;
-b = gray & 1; %Make binary image
+b = imageRightSizeGray & 1; %Make binary image
 st = regionprops(b, 'Area', 'BoundingBox'); 
 array = [st.BoundingBox]; %Get an array of all bounding boxes
 a = imcrop(imageToResize, [array(1)-z array(1)-z array(3)+(2*z) array(4)+(2*z)]);

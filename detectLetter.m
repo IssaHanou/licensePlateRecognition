@@ -1,4 +1,4 @@
-function letter = detectLetter(image)
+function letter = detectLetter(color, image)
 %Array keeping al characters to check against.
 charArray = getPossibleChars(4);
 
@@ -29,7 +29,7 @@ end
 [minChar,index] = min(resultsArray);
 letter = charArray(index);
 
-if letter == 'B'
+if letter == 'B' || letter == '8'
     letter = checkB(image, resultsArray);
 end
 end
