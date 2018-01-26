@@ -50,5 +50,5 @@ if strfind(licensePlateString,'-') <= 1
 elseif length(unique(licensePlateString)) < 5
     licensePlateString = '';
 end
-
+licensePlateString = noNumbers(licensePlateString,pos1,pos2);
 end

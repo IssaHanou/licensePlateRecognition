@@ -5,11 +5,12 @@ function chars = getPossibleChars(num)
 %3=all starting numbers
 %4=all letter and numbers
 
-%66=b, 68=d, 70:72=f:h, 74:78=j:n, 80=p, 82:84=r:t, 86:90=v:z
-letters = [char(66),char(68),char(70:72),char(74:76),char(78),char(80),char(82:84),char(86:90)];
+%66=b, 68=d, 70:72=f:h, 74:76=j:l, 78=n, 80=p, 82:84=r:t, 86=v, 88=x, 90=z
+letters = [char(66),char(68),char(70:72),char(74:76),char(78),char(80),char(82:84),char(86),char(88),char(90)];
 starts = [char(66),char(72:74),char(74:76),char(78),char(80),char(82:84),char(86),char(88),char(90)];
 nums = char(48:57);
-probs = [char(66),char(68),char(83),char(56),char(51),char(49),char(84),char(80)];
+%b,d,s:t,8:9,3:5,1,p,j:l,f,n
+probs = [char(66),char(68),char(83:84),char(56:57),char(51:54),char(49),char(80),char(74:76),char(72),char(78)];
 
 if num == 0
     chars = probs;
