@@ -1,6 +1,6 @@
-function letter = detectLetter(color, image)
+function letter = detectLetter(image, possibilities)
 %Array keeping al characters to check against.
-charArray = getPossibleChars(4);
+charArray = getPossibleChars(possibilities);
 
 %Array to store the result of every character
 resultsArray = zeros(length(charArray),1);

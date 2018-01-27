@@ -71,11 +71,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 [filename pathname] = uigetfile('*avi', 'Pink AVI file');
     vidObj = VideoReader(fullfile(pathname, filename));
 %Read in the video
-<<<<<<< HEAD
 %vidObj = VideoReader('Project Files/TrainingVideo.avi');
-=======
-vidObj = VideoReader('Project Files/TrainingVideo.avi');
->>>>>>> fb6225546717e7acc69521ee4f4a792226006f31
 %vidObj = VideoReader('project files/TrainingSet/Categorie II/Video225.avi');
 handles.output = hObject;
 handles.vidObj = vidObj;

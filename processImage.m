@@ -1,4 +1,5 @@
 function [licensePlateString, licensePlateImage] = processImage(image)
+%image = imread('images/9.JPG');
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
 
@@ -41,8 +42,11 @@ letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray);
 
 %Get the license plate string
 licensePlate = createLicensePlate(letterArray,pos1,pos2);
-licensePlateString = checkLicensePlate(licensePlate, pos1, pos2);
-
+[licensePlateString,number1] = checkLicensePlate2(licensePlate, pos1, pos2,img1,img2,img3,img4,img5,img6,gray);
+if number1 == 0
+    licensePlateString = '';
+    return;
+end
 %If there are more than 2 of the same character (except for -) return
 %nothing
 checkTriples = erase(licensePlateString,'-');
@@ -50,5 +54,6 @@ checkTriples = erase(licensePlateString,'-');
 %     licensePlateString = '';
 % end
 licensePlateString = noNumbers(licensePlateString,pos1,pos2);
+display(licensePlateString);
 
 end
