@@ -101,7 +101,9 @@ for i=1:length(license)
             if im ~= 0
                 license(i) = detectLetter(im, 1 ,true);
                 letter = license(i);
-                license(i) = extraLetterCheck(letter,im);
+                if contains(getPossibleChars(10),letter)
+                    license(i) = extraLetterCheck(letter,im);
+                end
             end
         end
     end
