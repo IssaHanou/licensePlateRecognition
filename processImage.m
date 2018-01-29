@@ -1,5 +1,4 @@
 function [licensePlateString, licensePlateImage] = processImage(image)
-%image = imread('images/9.JPG');
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]); 
 
@@ -14,7 +13,17 @@ plate = getPlate(img);
 colorCrop = imcrop(img,coor); 
 
 %Execute rotImage with the cropped image
-img = rotImage(grayCrop);
+[height,width,~] = size(colorCrop);
+[grayimg,colorimg,angle] = rotImage(grayCrop,colorCrop);
+alpha = abs(angle); %The angle with which the image is rotated
+AC = sin(alpha*pi/180)*height; %Calculate the distance of the rotated image (black triangles)
+BD = sin(alpha*pi/180)*width;
+%Set coordinates
+x = AC;
+y = BD;
+w = width - AC;
+h = height - BD;
+img = imcrop(colorimg,[x y w h]); %Crop to the plate
 licensePlateImage = img;
 %imshow(img);
 
@@ -25,6 +34,7 @@ if x < 100
     return
 end
 
+img = rgb2gray(img);
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,grayFactor,pos1,pos2] = getAllLettersY(img);
 grayFactor = grayFactor + 10; %Threshold to be surer to get the right letters.
