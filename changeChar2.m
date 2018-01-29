@@ -48,7 +48,7 @@ for i=1:length(licensePlate)
                 end
             end
             if im ~= 0
-            licensePlate(i) = detectLetter(im, 2);
+                licensePlate(i) = detectLetter(im, gray, 2);
             end
         end
     elseif i ~= pos1 || i ~= pos2
@@ -97,7 +97,7 @@ for i=1:length(licensePlate)
                 end
             end
             if im ~= 0
-                licensePlate(i) = detectLetter(im, 1);
+                licensePlate(i) = detectLetter(im, gray, 1);
             end
         end
     end

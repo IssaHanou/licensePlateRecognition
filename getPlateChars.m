@@ -4,39 +4,39 @@ function letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,gray)
 letterArray = [];
 if img1 ~= -1
     imgb1 = toBinary(img1, gray);
-    letterArray(end+1) = detectLetter(imgb1,4);
+    letterArray(end+1) = detectLetter(imgb1,gray,4);
 else 
     letterArray(end+1) = -1;
 end
 
 if img2 ~= -1
     imgb2 = toBinary(img2, gray);
-    letterArray(end+1) = detectLetter(imgb2,4);
+    letterArray(end+1) = detectLetter(imgb2,gray,4);
 else 
     letterArray(end+1) = -1;
 end 
 
 if img3 ~= -1
     imgb3 = toBinary(img3, gray);
-    letterArray(end+1) = detectLetter(imgb3,4);
+    letterArray(end+1) = detectLetter(imgb3,gray,4);
 else 
     letterArray(end+1) = -1;
 end
 
 if img4 ~= -1
     imgb4 = toBinary(img4, gray);
-    letterArray(end+1) = detectLetter(imgb4,4);
+    letterArray(end+1) = detectLetter(imgb4,gray,4);
 end
 if img5 ~= -1
     imgb5 = toBinary(img5, gray);
-    letterArray(end+1) = detectLetter(imgb5,4);
+    letterArray(end+1) = detectLetter(imgb5,gray,4);
 else 
     letterArray(end+1) = -1;
 end
 
 if img6 ~= -1
     imgb6 = toBinary(img6, gray);
-    letterArray(end+1) = detectLetter(imgb6,4);
+    letterArray(end+1) = detectLetter(imgb6,gray,4);
 else 
     letterArray(end+1) = -1;
 end

@@ -47,6 +47,7 @@ if number1 == 0
     licensePlateString = '';
     return;
 end
+
 %If there are more than 2 of the same character (except for -) return
 %nothing
 licensePlateString = checkTriples(licensePlate);
