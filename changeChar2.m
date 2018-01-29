@@ -11,6 +11,9 @@ for i=1:length(license)
                 if contains(getPossibleChars(10),letter)
                     license(i) = extraLetterCheck(letter,im);
                 end
+                if license(i) == 'B'
+                    license(i) = '8';
+                end
             end
         end
     elseif i ~= pos1 || i ~= pos2
@@ -21,6 +24,11 @@ for i=1:length(license)
                 letter = license(i);
                 if contains(getPossibleChars(10),letter)
                     license(i) = extraLetterCheck(letter,im);
+                end
+                if license(i) == '8' || license(i) == '3'
+                    license(i) = 'B';
+                elseif license(i) == '1' || license(i) == '7'
+                    license(i) = 'T'
                 end
             end
         end

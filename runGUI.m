@@ -101,7 +101,7 @@ while(hasFrame(handles.vidObj))
     %Add current time to the timeStamps array
     timeStamps(end+1) = handles.vidObj.CurrentTime;
     
-    if (mod(frameCount,5) == 0)        %Do only if you want less frames
+    if (mod(frameCount,10) == 0)        %Do only if you want less frames
         [newPlate, plateImage] = processImage(vidFrame);
         axes(handles.axes1);
             h = get(handles.axes1, 'Children');

@@ -10,6 +10,7 @@ function chars = getPossibleChars(num)
 %8=2,3,8
 %9=4,6
 %10=allExtraChecks
+%11=t,h,j
 
 %66=b, 68=d, 70:72=f:h, 74:76=j:l, 78=n, 80=p, 82:84=r:t, 86=v, 88=x, 90=z
 letters = [char(66),char(68),char(70:72),char(74:76),char(78),char(80),char(82:84),char(86),char(88),char(90)];
@@ -28,6 +29,8 @@ num1 = [char(49),char(55)];
 num2 = [char(50),char(51),char(56)];
 %4,6
 num3 = [char(52),char(54)];
+%t,h,j
+thj = [char(84),char(72),char(74)];
 allExtraChecks = [char(66),char(68),char(82:83),char(72),char(70),char(80),char(49:52),char(54:56)];
 
 if num == 0
@@ -52,6 +55,8 @@ elseif num == 9
     chars = num3;
 elseif num == 10
     chars = allExtraChecks;
+elseif num == 11
+    chars = thj;
 end
 
 end

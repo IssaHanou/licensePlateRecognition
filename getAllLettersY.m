@@ -9,7 +9,7 @@ pos1 = 0;
 pos2 = 0;
 imageSizes = [];
 
-for factor=40:10:160 % Value x differs per image
+for factor=40:5:160 % Value x differs per image
     figures = 0;
     img = grayImg;
     img(img > factor) = 0; %Put everything higher than x on grayscale to black

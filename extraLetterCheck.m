@@ -10,5 +10,7 @@ elseif letterIn == '2' || letterIn == '3' || letterIn == '8'
     letterOut = detectLetter(image,8,false);
 elseif letterIn == '4' || letterIn == '6'
     letterOut = detectLetter(image,9,false);
+elseif letterIn == 'T' || letterIn == 'H' || letterIn == 'J'
+    letterOut = detectLetter(image,11,false);
 end
 end
