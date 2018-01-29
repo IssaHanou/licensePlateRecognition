@@ -49,10 +49,7 @@ if number1 == 0
 end
 %If there are more than 2 of the same character (except for -) return
 %nothing
-checkTriples = erase(licensePlateString,'-');
-% if length(unique(checkTriples)) < 5
-%     licensePlateString = '';
-% end
+licensePlateString = checkTriples(licensePlate);
 licensePlateString = noNumbers(licensePlateString,pos1,pos2);
 display(licensePlateString);
 
