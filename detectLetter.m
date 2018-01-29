@@ -23,8 +23,8 @@ for i=1:length(charArray)
     diff = abs(double(image) - double(resizedImage));
     
     %Store the difference in the array at the position of this character
-    [hist, bin] = diphist(diff, [1, 255], 255);
-    resultsArray(i) = hist(1);
+    [hist, bin] = diphist(diff, [1, 256], 256);
+    resultsArray(i) = max(hist);
 end    
 [minChar,index] = min(resultsArray);
 letter = charArray(index);

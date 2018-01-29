@@ -16,8 +16,7 @@ colorCrop = imcrop(img,coor);
 %Execute rotImage with the cropped image
 img = rotImage(grayCrop);
 licensePlateImage = img;
-figure;
-imshow(img);
+%imshow(img);
 
 %Only continue if there is a plate in the image
 [y,x] = size(img);
@@ -28,8 +27,6 @@ end
 
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,grayFactor,pos1,pos2] = getAllLettersY(img);
-
-
 grayFactor = grayFactor + 10; %Threshold to be surer to get the right letters.
 % display(pos1);
 % display(pos2);

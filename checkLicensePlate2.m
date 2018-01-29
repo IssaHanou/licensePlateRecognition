@@ -66,24 +66,8 @@ elseif and(pos1==3,pos2==6)
         number3 = 0;
     end
 end
-%display(number3);
 if number1 ~= 0 && number2 ~= 0
     license = changeChar2(license,pos1,pos2,number1,number2,number3,img1,img2,img3,img4,img5,img6);
-%     for i=1:length(license)
-%         if i == number1 || i == number2 || i == number3
-%             im = getIndexedImage(i,img1,img2,img3,img4,img5,img6,pos1,pos2);
-%             if im ~= 0
-%                 display(license);
-%                 license(i) = detectLetter(im,gray,2);
-%             end
-%         else 
-%             im = getIndexedImage(i,img1,img2,img3,img4,img5,img6,pos1,pos2);
-%             if im ~= 0
-%                 display(license);
-%                 license(i) = detectLetter(im,gray,1);
-%             end
-%         end
-%     end
 end
 licensePlate = license;
 end
