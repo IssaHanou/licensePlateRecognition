@@ -1,4 +1,4 @@
-function letter = detectLetter(image, possibilities)
+function letter = detectLetter(image, possibilities, checkingLetterNumberBoolean)
 %Array keeping al characters to check against.
 charArray = getPossibleChars(possibilities);
 
@@ -29,10 +29,12 @@ end
 [minChar,index] = min(resultsArray);
 letter = charArray(index);
 
-edgeLetters = getPossibleChars(0);
-
-if contains(edgeLetters,letter) == 1
-    letter = checkLetter(letter, image, resultsArray);
+%Only do the letter check on first detection round. 
+if checkingLetterNumberBoolean == false
+    edgeLetters = getPossibleChars(0);
+    if contains(edgeLetters,letter) == 1
+        letter = checkLetter(letter, image, resultsArray);
+    end
 end
 end
 
