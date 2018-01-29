@@ -97,7 +97,7 @@ for i=1:length(licensePlate)
                 end
             end
             if im ~= 0
-                licensePlate(i) = detectletter(im, 1);
+                licensePlate(i) = detectLetter(im, 1);
             end
         end
     end
