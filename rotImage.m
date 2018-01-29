@@ -1,4 +1,4 @@
-function grayRot = rotImage(grayCrop)
+function [grayRot,colorRot,angle] = rotImage(grayCrop,colorCrop)
 [rows, columns] = find(grayCrop);
 row1 = min(rows);
 row2 = max(rows);
@@ -10,7 +10,9 @@ struct = regionprops(b , 'Orientation', 'BoundingBox');
 angle = struct.Orientation; % Get the angle of the license plate
 if angle ~= 90 % If the plate is already horizontal, don't rotate
     grayRot = imrotate(c,angle*-1,'bilinear'); 
+    colorRot = imrotate(colorCrop,angle*-1,'bilinear');
 else
     grayRot = c;
+    colorRot = d;
 end
 end

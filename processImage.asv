@@ -24,6 +24,20 @@ y = BD;
 w = width - AC;
 h = height - BD;
 onlyPlate = imcrop(colorimg,[x y w h]); %Crop to the plate
+red = onlyPlate(:,:,1);
+imshow(red)
+green = onlyPlate(:,:,2);
+figure;
+imshow(green)
+blue = onlyPlate(:,:,3);
+yellow = (red > 120 & red < 180) & (green == 1 & blue == 0;
+figure;
+imshow(yellow)
+red(yellow) = 0;
+green(yellow) = 0;
+blue(yellow) = 0;
+onlyPlate = cat(3, red, green, blue);
+figure;
 imshow(onlyPlate)
 
 % %Only continue if there is a plate in the image
