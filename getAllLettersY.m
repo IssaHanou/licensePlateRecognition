@@ -1,4 +1,4 @@
-function [a,b,c,d,e,f,factor,pos1,pos2] = getAllLettersY(grayImg)
+function [img1,img2,img3,img4,img5,img6,factor,pos1,pos2] = getAllLettersY(grayImg)
 a = -1;
 b = -1;
 c = -1;
@@ -29,6 +29,7 @@ for factor=40:10:160 % Value x differs per image
                     imageSizes(1) = array(n+2) * array(n+3);
                     %The x coordinate of the right down corner
                     enda = array(n)+array(n+2);
+                    starta = array(n);
                 elseif figures == 1
                     b = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(2) = array(n+2) * array(n+3);

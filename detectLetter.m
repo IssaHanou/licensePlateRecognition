@@ -1,4 +1,4 @@
-function letter = detectLetter(image, gray, possibilities)
+function letter = detectLetter(image, possibilities)
 %Array keeping al characters to check against.
 charArray = getPossibleChars(possibilities);
 
@@ -14,12 +14,12 @@ for i=1:length(charArray)
     
     %Read in the image and convert it to binary image, with white character 
     im = imread(string);
-    gray = rgb2gray(im);
-    bin = gray & 1;
+    grayIm = rgb2gray(im);
+    bin = grayIm & 1;
     white = bin == 0;
     
     %Resize the image to the same size as the image found in the plate
-    resizedImage = resizeImage(white, image, gray);
+    resizedImage = resizeImage(white, image, grayIm);
     diff = abs(double(image) - double(resizedImage));
     
     %Store the difference in the array at the position of this character
