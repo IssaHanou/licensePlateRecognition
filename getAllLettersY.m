@@ -21,14 +21,15 @@ for factor=40:5:160 % Value x differs per image
         if(array(n+3) > 10) %Only get the areas which are higher than 10 pixels
             if((array(n+3)/array(n+2)) >= 1.3 && (array(n+3)/array(n+2))<=3) %Check if the dimensions are good
                 z=2; %Add 2 pixels to the bounding boxes
-                if figures == 0
                     %Crop the image to get the letter
+                if figures == 0
                     a = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     heights(1) = array(n+1);
                     %Calculate the size of the image
                     imageSizes(1) = array(n+2) * array(n+3);
                     %The x coordinate of the right down corner
                     enda = array(n)+array(n+2);
+                    r1 = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                 elseif figures == 1
                     b = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(2) = array(n+2) * array(n+3);
@@ -36,29 +37,43 @@ for factor=40:5:160 % Value x differs per image
                     endb = array(n)+array(n+2);
                     %The x coordinate of the left down corner
                     startb = array(n);
+                    r2 = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                 elseif figures == 2
                     c = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(3) = array(n+2) * array(n+3);
                     heights(3) = array(n+1);
                     endc = array(n)+array(n+2);
                     startc = array(n);
+                    r3 = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                 elseif figures == 3
                     d = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(4) = array(n+2) * array(n+3);
                     heights(4) = array(n+1);
                     endd = array(n)+array(n+2);
                     startd = array(n);
+                    r4 = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                 elseif figures == 4
                     e = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(5) = array(n+2) * array(n+3);
                     heights(5) = array(n+1);
                     ende = array(n)+array(n+2);
                     starte = array(n);
+                    r5 = [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)];
                 elseif figures == 5
                     f = imcrop(grayImg, [array(n)-z array(n+1)-z array(n+2)+(2*z) array(n+3)+(2*z)]);
                     imageSizes(6) = array(n+2) * array(n+3);
                     heights(6) = array(n+1);
                     startf = array(n);
+%                     figure;
+%                     imshow(grayImg)
+%                     hold on;
+%                     rectangle('Position',r1,'EdgeColor','r','LineWidth',1);
+%                     rectangle('Position',r2,'EdgeColor','r','LineWidth',1);
+%                     rectangle('Position',r3,'EdgeColor','r','LineWidth',1);
+%                     rectangle('Position',r4,'EdgeColor','r','LineWidth',1);
+%                     rectangle('Position',r5,'EdgeColor','r','LineWidth',1);
+%                     rectangle('Position',[array(n) array(n+1) array(n+2) array(n+3)],'EdgeColor','r','LineWidth',1);
+%                     hold off;
                 end
                 figures = figures + 1;
                 if figures == 6 %If it has all 6 icons...

@@ -3,11 +3,9 @@ function [licensePlateString, licensePlateImage] = processImage(image)
 img = imresize(image,[400 NaN]); 
 
 %Execute getPlate with the image
-plate = getPlate(img); 
-
-%Execute getEdges with the image from getPlate
+plate = getPlate(img);
+% Execute getEdges with the image from getPlate
 [labelImage,grayImage,binaryImage] = getEdges(plate);
-
 %Execute getCroppedPlate with the plate image and binary image
 [grayCrop,coor] = getCroppedPlate(binaryImage, plate);
 colorCrop = imcrop(img,coor); 
@@ -23,18 +21,16 @@ x = AC;
 y = BD;
 w = width - AC;
 h = height - BD;
-img = imcrop(colorimg,[x y w h]); %Crop to the plate
-licensePlateImage = img;
+imgCropped = imcrop(colorimg,[x y w h]); %Crop to the plate
+imgColor = imgCropped;
+licensePlateImage = imgCropped;
 %imshow(img);
-
 %Only continue if there is a plate in the image
-[y,x] = size(img);
+[y,x,z] = size(imgCropped);
 if x < 100 
-    licensePlateString = '';
-    return
+    imgCropped = getPlate3(img);
 end
-
-img = rgb2gray(img);
+img = rgb2gray(imgCropped);
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,grayFactor,pos1,pos2] = getAllLettersY(img);
 grayFactor = grayFactor + 10; %Threshold to be surer to get the right letters.
