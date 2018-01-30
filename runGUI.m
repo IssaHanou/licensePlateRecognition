@@ -92,16 +92,17 @@ timeStamps = [];
 set(handles.uitable1, 'Data', {});
 axes(handles.axes1);
 
+startTime = tic;
 %Keep getting frames till no more frames are left
 while(hasFrame(handles.vidObj))
     
-    vidFrame = readFrame(handles.vidObj);
+    vidFrame = readFrame(handles.vidObj);   
 
 
     %Add current time to the timeStamps array
     timeStamps(end+1) = handles.vidObj.CurrentTime;
     
-    if (mod(frameCount,10) == 0)        %Do only if you want less frames
+    if (mod(frameCount,8) == 0)        %Do only if you want less frames
         [newPlate, plateImage] = processImage(vidFrame);
         axes(handles.axes1);
             h = get(handles.axes1, 'Children');
@@ -119,11 +120,12 @@ while(hasFrame(handles.vidObj))
     frameCount = frameCount + 1;
 end
 
+timeTaken = toc(startTime);
 %Get the output from the table
 tableData = get(handles.uitable1, 'Data');
 %results = getFinalData(tableData);
 checkSolution(tableData, 'TrainingSolutions');
-
+display(timeTaken);
 
 % --- Executes when user attempts to close figure1.
 function figure1_CloseRequestFcn(hObject, eventdata, handles)

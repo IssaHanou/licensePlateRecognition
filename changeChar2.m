@@ -12,11 +12,11 @@ for i=1:length(license)
                 end
             end
         end
-        %letter = license(i);
-        %license(i) = extraNumberCheck(letter,im,grayFactor);
+        letter = license(i);
+        license(i) = extraNumberCheck(letter,im,grayFactor);
     elseif i ~= pos1 || i ~= pos2
+        im = getIndexedImage(i,img1,img2,img3,img4,img5,img6,pos1,pos2);
         if contains(nums,license(i))
-            im = getIndexedImage(i,img1,img2,img3,img4,img5,img6,pos1,pos2);
             if im ~= 0
                 license(i) = detectLetter(im, 1 ,true);
                 letter = license(i);
@@ -27,11 +27,12 @@ for i=1:length(license)
                     license(i) = 'B';
                 elseif license(i) == '1' || license(i) == '7'
                     license(i) = 'T';
-%                 elseif license(i) == '9'
-%                     license(i) = 'N';
                 end
             end
         end
+%         if license(i) == 'B'
+%             license(i) = checkNumber(toBinary(im,grayFactor),10,4);   
+%         end
     end
 end
 licensePlate = license;
