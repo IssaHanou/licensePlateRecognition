@@ -111,10 +111,7 @@ while(hasFrame(handles.vidObj))
         guidata(hObject,handles);
         
         if ~isempty(newPlate)
-            %Display the plate image
-            axes(handles.axes3);
-            h = get(handles.axes3, 'Children');
-            image(plateImage);
+            axes(handles.ax
             
             %Get old data from the table
             data = get(handles.uitable1, 'Data');
