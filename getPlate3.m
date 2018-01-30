@@ -1,7 +1,7 @@
 function plate = getPlate3(image)
 plate = image;
 grayIm = rgb2gray(image); %Create a grayscale image
-%**********************************
+%************
 %Calculate threshold value of the grayscale image
 [~, threshold] = edge(grayIm, 'sobel');
 
