@@ -61,14 +61,6 @@ for i=1:length(chars)
     diff2 = abs(checkSize*checkGravity - dataSize*dataGravity);
     diff2Array(i) = diff2;
 end
-% [mini1,index1] = min(sizeArray);
-% [mini2,index2] = min(perArray);
-% [mini3,index3] = min(diffArray);
-% [mini4,index4] = min(gravityArray);
-% [mini5,index5] = min(diff2Array);
-% letters = [originalLetter,chars(index1),chars(index2),chars(index3),chars(index4),chars(index5)];
-% letter = mode(letters);
-
 % [minD,indexD] = min(diffArray);
 % letter = chars(indexD);
 

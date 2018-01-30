@@ -4,7 +4,7 @@ numberOut = numberIn;
 
 if numberIn == '0'
 %     numberOut = check0986(binIm,numberIn);
-    numberOut = checkNumber(binIm,numberIn,0,1);
+%     numberOut = checkNumber(binIm,numberIn,0,1);
 elseif numberIn == '1'
     numberOut = checkNumber(binIm,numberIn,1,2);
 elseif numberIn == '2'

@@ -103,13 +103,13 @@ while(hasFrame(handles.vidObj))
     if (mod(frameCount,10) == 0)        %Do only if you want less frames
         [newPlate, plateImage] = processImage(vidFrame);
         
-%         axes(handles.axes1);
+        axes(handles.axes1);
         h = get(handles.axes1, 'Children');
         set(h, 'CData', vidFrame);
         guidata(hObject,handles);
         
         if ~isempty(newPlate)
-            %Display the plate image - 400 seconds
+            %Display the plate image  
 %             axes(handles.axes3);
 %             h = get(handles.axes3, 'Children');
 %             image(plateImage);
