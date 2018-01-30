@@ -36,8 +36,9 @@ if x < 100
         return;
     end
 end
-figure;
-imshow(imgCropped)
+% figure;
+% imshow(imgCropped)
+
 img = rgb2gray(imgCropped);
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,grayFactor,pos1,pos2] = getAllLettersY(img);
