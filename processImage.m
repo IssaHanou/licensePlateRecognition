@@ -27,7 +27,7 @@ imgColor = imgCropped;
 licensePlateImage = imgCropped;
 [y,x,z] = size(imgCropped);
 %If there is no plate in the image, try another method to get a plate
-if ~(x/y >= 3.7 && x/y <= 4.7)
+if ~(x/y >= 3.7 && x/y <= 5.1)
     imgCropped = getPlate3(img);
     [y,x,z] = size(imgCropped);
     %Only continue if there now is a plate in the image
@@ -40,8 +40,8 @@ if ~(x/y >= 3.7 && x/y <= 4.7)
         end
     end
 end
-figure;
-imshow(imgCropped)
+% figure;
+% imshow(imgCropped)
 
 img = rgb2gray(imgCropped);
 %Execute getAllLetters with the rotated image
