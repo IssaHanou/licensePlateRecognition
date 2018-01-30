@@ -3,17 +3,20 @@ nums = getPossibleChars(2);
 im = 0;
 for i=1:length(license)
     if i == number1 || i == number2 || i == number3
-        im = getIndexedImage(i,img1,img2,img3,img4,img5,img6,pos1,pos2);
         if ~contains(nums,license(i))
+            im = getIndexedImage(i,img1,img2,img3,img4,img5,img6,pos1,pos2);
             if im ~= 0
                 license(i) = detectLetter(im, 2, true);
+                letter = license(i);
+                if contains(getPossibleChars(10),letter)
+                    im = toBinary(im,grayFactor);
+                    license(i) = extraLetterCheck(letter,im);
+                end
                 if license(i) == 'B'
                     license(i) = '8';
                 end
             end
         end
-        %letter = license(i);
-        %license(i) = extraNumberCheck(letter,im,grayFactor);
     elseif i ~= pos1 || i ~= pos2
         if contains(nums,license(i))
             im = getIndexedImage(i,img1,img2,img3,img4,img5,img6,pos1,pos2);

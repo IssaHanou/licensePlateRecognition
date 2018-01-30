@@ -1,0 +1,50 @@
+function letter = checkNumber(binaryIm,possibilities)
+%chars to check
+chars = getNumProblems(possibilities);
+%perimeter results
+perArray = zeros(length(chars),1);
+
+%perimeter to match
+dataCheck = measure(binaryIm,label(binaryIm),{'perimeter','size'});
+
+for i=1:length(chars)
+    %Create file name string
+    string = 'lettersNumbers/';
+    current = chars(i);
+    string = strcat(string,current);
+    string = strcat(string,'.PNG');
+    
+    %Read in the image and convert it to binary image, with white character 
+    im = imread(string);
+    grayIm = rgb2gray(im);
+    bin = grayIm & 1;
+    white = bin == 0;
+    
+    %Resize the image to the same size as the image found in the plate
+    resizedImage = resizeImage(white, binaryIm, grayIm);
+    
+    %perimeter of this char
+    data = measure(resizedImage,label(resizedImage),{'Perimeter','Size'});
+    if length(data.perimeter) > 1
+        [per,index] = max(data.perimeter);
+        dataSize = data.perimeter(index);
+    end
+    
+    perArray(end+1) = per;
+end
+
+ m1 = measure(image, label(image), {'size', 'perimeter'})
+    m2 = measure(resizedImage, label(resizedImage), {'size', 'perimeter'})
+    m1.perimeter/m1.size-m2.perimeter/m2.size
+    diff = abs(double(image) - double(resizedImage));
+    sum(sum(diff))
+
+current = Inf;
+for i=1:length(perArray)
+    diff = abs(perArray(i) - perCheck);
+    if  diff < current
+        current = diff;
+    end
+end
+letter = current;
+end

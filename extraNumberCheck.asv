@@ -1,0 +1,27 @@
+function numberOut = extraNumberCheck(numberIn, image, grayFactor)
+image = double(image);
+binIm = toBinary(image,grayFactor);
+numberOut = numberIn;
+if numberIn == '0'
+    numberOut = checkNumber(image,binIm,0);
+%     numberOut = skeletonCheck(binIm,0);
+elseif numberIn == '1'
+    numberOut = skeletonCheck(binIm,1)
+elseif numberIn == '2'
+    numberOut = skeletonCheck(binIm,2);
+elseif numberIn == '3' 
+    numberOut = skeletonCheck(binIm,3);
+elseif numberIn == '4' 
+    numberOut = skeletonCheck(binIm,4);
+elseif numberIn == '5' 
+    numberOut = skeletonCheck(binIm,5);
+elseif numberIn == '6' 
+    numberOut = skeletonCheck(binIm,6);
+elseif numberIn == '7' 
+    numberOut = skeletonCheck(binIm,7);
+elseif numberIn == '8' 
+    numberOut = skeletonCheck(binIm,8);
+elseif numberIn == '9' 
+    numberOut = skeletonCheck(binIm,9);
+end
+end

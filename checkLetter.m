@@ -1,18 +1,22 @@
-function letter = checkLetter(letter, image, resultsArray)
-%display(resultsArray);
+function letter = checkLetter(image, possibilities)
 [features,vis] = extractHOGFeatures(image);
-chars = getPossibleChars(0);
+chars = getPossibleChars(possibilities);
+dist = zeros(length(chars),1);
+
 for i=1:length(chars)
     string = 'lettersNumbers/';
     current = chars(i);
     string = strcat(string,current);
     string = strcat(string,'.PNG');
+    
     im = imread(string);
-    gray = rgb2gray(im);
-    bin = gray & 1;
+    grayIm = rgb2gray(im);
+    bin = grayIm & 1;
     white = bin == 0;
-    resizedImage = resizeImage(white, image, gray);
+    
+    resizedImage = resizeImage(white, image, grayIm);
     [charf,charv] = extractHOGFeatures(resizedImage);
+    
     diff = features - charf;
     dist(i) = norm(diff);
 end

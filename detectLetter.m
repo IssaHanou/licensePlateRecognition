@@ -34,7 +34,7 @@ letter = charArray(index);
 if checkingLetterNumberBoolean == false
     edgeLetters = getPossibleChars(0);
     if contains(edgeLetters,letter) == 1
-        letter = checkLetter(letter, image, resultsArray);
+        letter = checkLetter(image, 0);
     end
 end
 end
