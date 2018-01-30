@@ -4,6 +4,7 @@ img = imresize(image,[400 NaN]);
 
 %Execute getPlate with the image
 plate = getPlate(img);
+
 % Execute getEdges with the image from getPlate
 [labelImage,grayImage,binaryImage] = getEdges(plate);
 %Execute getCroppedPlate with the plate image and binary image
@@ -24,18 +25,23 @@ h = height - BD;
 imgCropped = imcrop(colorimg,[x y w h]); %Crop to the plate
 imgColor = imgCropped;
 licensePlateImage = imgCropped;
-%imshow(img);
-%Only continue if there is a plate in the image
 [y,x,z] = size(imgCropped);
+%If there is no plate in the image, try another method to get a plate
 if x < 100 
     imgCropped = getPlate3(img);
+    [y,x,z] = size(imgCropped);
+    %Only continue if there now is a plate in the image
+    if x < 100
+        licensePlateString = '';
+        return;
+    end
 end
+figure;
+imshow(imgCropped)
 img = rgb2gray(imgCropped);
 %Execute getAllLetters with the rotated image
 [img1,img2,img3,img4,img5,img6,grayFactor,pos1,pos2] = getAllLettersY(img);
 grayFactor = grayFactor + 10; %Threshold to be surer to get the right letters.
-% display(pos1);
-% display(pos2);
 
 %If the stripe positions are not in the right place, don't return
 if ~and(pos1==3,pos2==7) &&~and(pos1==3,pos2==6) && ~and(pos1==2,pos2==6)

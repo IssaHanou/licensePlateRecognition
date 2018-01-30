@@ -24,25 +24,21 @@ dilatedIm = imdilate(mask, [se90 se0]);
 % figure;
 % imshow(dilatedIm)
 % title('dilated')
-
 %Suppress light structures connected to image border
 noBorders = imclearborder(dilatedIm, 4);
 % figure;
 % imshow(noBorders)
 % title('cleared borders')
-
 %Fill the holes in the middle of the image
 filledHoles = imfill(noBorders, 'holes'); 
 % figure;
 % imshow(filledHoles)
 % title('filled holes')
-
 %Suppress light structures connected to image border again
 noBorders = imclearborder(filledHoles, 4);
 % figure;
 % imshow(noBorders)
 % title('clear border')
-
 %Creates a diamond-shaped structuring element, 
 %  where 1 is the distance from the structuring element origin to the points of the diamond.
 seD = strel('diamond',1); 
@@ -57,7 +53,6 @@ filledPlate = bwareafilt(erodedFirst,2);
 % figure;
 % imshow(filledPlate)
 % title('filled plate')
-
 st = regionprops(filledPlate, 'Area', 'BoundingBox'); 
 array = [st.BoundingBox];
 for n=1:4:length(array)
@@ -68,5 +63,4 @@ for n=1:4:length(array)
         end
     end
 end
-
 end
