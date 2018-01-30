@@ -8,9 +8,9 @@ grayIm = rgb2gray(image); %Create a grayscale image
 %Create a binary mask (binary image with only the edges being 1)
 fudgeFactor = .5;
 mask = edge(grayIm,'sobel', threshold * fudgeFactor); 
-% figure;
-% imshow(mask)
-% title('mask')
+figure;
+imshow(mask)
+title('mask')
 %Creates a linear structuring element that is symmetric with respect to the 
 %  neighborhood center. 90 specifies the angle (in degrees) of the line as 
 %  measured in a counterclockwise direction from the horizontal axis. 
@@ -21,38 +21,43 @@ se0 = strel('line', 2, 0);
 
 %Create a dilated image from the binary edge image
 dilatedIm = imdilate(mask, [se90 se0]);
-% figure;
-% imshow(dilatedIm)
-% title('dilated')
+figure;
+imshow(dilatedIm)
+title('dilated')
+
 %Suppress light structures connected to image border
 noBorders = imclearborder(dilatedIm, 4);
-% figure;
-% imshow(noBorders)
-% title('cleared borders')
+figure;
+imshow(noBorders)
+title('cleared borders')
+
 %Fill the holes in the middle of the image
 filledHoles = imfill(noBorders, 'holes'); 
-% figure;
-% imshow(filledHoles)
-% title('filled holes')
+figure;
+imshow(filledHoles)
+title('filled holes')
+
 %Suppress light structures connected to image border again
 noBorders = imclearborder(filledHoles, 4);
-% figure;
-% imshow(noBorders)
-% title('clear border')
+figure;
+imshow(noBorders)
+title('clear border')
+
 %Creates a diamond-shaped structuring element, 
 %  where 1 is the distance from the structuring element origin to the points of the diamond.
 seD = strel('diamond',1); 
 
 %Erode the image
 erodedFirst = imerode(noBorders,seD);
-% figure;
-% imshow(erodedFirst)
-% title('eroded')
+figure;
+imshow(erodedFirst)
+title('eroded')
 
 filledPlate = bwareafilt(erodedFirst,2);
-% figure;
-% imshow(filledPlate)
-% title('filled plate')
+figure;
+imshow(filledPlate)
+title('filled plate')
+
 st = regionprops(filledPlate, 'Area', 'BoundingBox'); 
 array = [st.BoundingBox];
 for n=1:4:length(array)
@@ -63,4 +68,5 @@ for n=1:4:length(array)
         end
     end
 end
+
 end
