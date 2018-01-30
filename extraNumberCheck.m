@@ -17,7 +17,7 @@ elseif numberIn == '5'
 elseif numberIn == '6' 
     numberOut = checkNumber(binIm,numberIn,6,2);
 elseif numberIn == '7' 
-    numberOut = checkNumber(binIm,numberIn,7,5);
+    numberOut = checkNumber(binIm,numberIn,7,6);
 elseif numberIn == '8' 
     numberOut = checkNumber(binIm,numberIn,8,2);
 elseif numberIn == '9' 

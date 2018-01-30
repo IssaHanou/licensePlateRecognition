@@ -95,26 +95,24 @@ axes(handles.axes1);
 startTime = tic;
 %Keep getting frames till no more frames are left
 while(hasFrame(handles.vidObj))
-    
-    vidFrame = readFrame(handles.vidObj);   
-
+    vidFrame = readFrame(handles.vidObj);  
 
     %Add current time to the timeStamps array
     timeStamps(end+1) = handles.vidObj.CurrentTime;
     
-    if (mod(frameCount,8) == 0)        %Do only if you want less frames
+    if (mod(frameCount,10) == 0)        %Do only if you want less frames
         [newPlate, plateImage] = processImage(vidFrame);
         
-        axes(handles.axes1);
+%         axes(handles.axes1);
         h = get(handles.axes1, 'Children');
         set(h, 'CData', vidFrame);
         guidata(hObject,handles);
         
         if ~isempty(newPlate)
-            %Display the plate image
-            axes(handles.axes3);
-            h = get(handles.axes3, 'Children');
-            image(plateImage);
+            %Display the plate image - 400 seconds
+%             axes(handles.axes3);
+%             h = get(handles.axes3, 'Children');
+%             image(plateImage);
             
             %Get old data from the table
             data = get(handles.uitable1, 'Data');

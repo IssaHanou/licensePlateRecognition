@@ -72,6 +72,7 @@ end
 % [minD,indexD] = min(diffArray);
 % letter = chars(indexD);
 
+index = 0;
 if checker == 1
     [mini,index] = min(sizeArray);
 elseif checker == 2
@@ -83,5 +84,16 @@ elseif checker == 4
 elseif checker == 5
     [mini,index] = min(diff2Array);
 end
-letter = chars(index);
+
+if checker == 6
+    [mini1,index1] = min(sizeArray);
+    [mini2,index2] = min(perArray);
+    [mini3,index3] = min(diffArray);
+    [mini4,index4] = min(gravityArray);
+    [mini5,index5] = min(diff2Array);
+    letters = [originalLetter,chars(index1),chars(index2),chars(index3),chars(index4),chars(index5)];
+    letter = mode(letters);
+else
+    letter = chars(index);
+end
 end

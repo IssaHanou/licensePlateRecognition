@@ -30,7 +30,7 @@ elseif num == 7 %7,9,3,2
 elseif num == 8 %8,3,6,0
     chars = [char(56),char(51),char(54)];
 elseif num == 9 
-    chars = [char(57),char(55)];
+    chars = [char(57),char(53)];
 elseif num == 10
     chars = [char(66),char(68),char(83),char(80),char(82),char(72)];
 end
