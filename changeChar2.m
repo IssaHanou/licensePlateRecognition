@@ -30,9 +30,10 @@ for i=1:length(license)
                 end
             end
         end
-%         if license(i) == 'B'
-%             license(i) = checkNumber(toBinary(im,grayFactor),10,4);   
-%         end
+        if license(i) == 'B'
+            %license(i) = checkNumber(toBinary(im,grayFactor),license(i),10,4);   
+            license(i) = checkLetter(im, 5);
+        end
     end
 end
 licensePlate = license;

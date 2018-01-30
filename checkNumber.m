@@ -1,4 +1,4 @@
-function letter = checkNumber(binaryIm, originalLetter,possibilities,checker)
+function letter = checkNumber(binaryIm,originalLetter,possibilities,checker)
 %checker=1->check size, checker=2->check perimeter, checker=3->check both
 %checker=4->gravity, checker=5->check size*gravity
 
