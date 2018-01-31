@@ -52,7 +52,7 @@ letterArray = getPlateChars(img1,img2,img3,img4,img5,img6,grayFactor);
 
 %Get the license plate string
 licensePlate = createLicensePlate(letterArray,pos1,pos2);
-[licensePlateString,number1] = checkLicensePlate2(licensePlate, pos1, pos2,img1,img2,img3,img4,img5,img6);
+[licensePlateString,number1] = checkLicensePlate2(licensePlate, pos1, pos2,img1,img2,img3,img4,img5,img6,grayFactor);
 if number1 == 0
     licensePlateString = '';
     return;

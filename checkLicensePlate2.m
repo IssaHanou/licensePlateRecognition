@@ -1,4 +1,4 @@
-function [licensePlate,number1] = checkLicensePlate2(license, pos1, pos2,img1,img2,img3,img4,img5,img6)
+function [licensePlate,number1] = checkLicensePlate2(license, pos1, pos2,img1,img2,img3,img4,img5,img6,grayFactor)
 nums = getPossibleChars(2);
 number1 = 0;
 number2 = 0;
@@ -67,7 +67,7 @@ elseif and(pos1==3,pos2==6)
     end
 end
 if number1 ~= 0 && number2 ~= 0
-    license = changeChar2(license,pos1,pos2,number1,number2,number3,img1,img2,img3,img4,img5,img6);
+    license = changeChar2(license,pos1,pos2,number1,number2,number3,img1,img2,img3,img4,img5,img6,grayFactor);
 end
 licensePlate = license;
 end
