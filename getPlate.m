@@ -1,46 +1,31 @@
-function plate = getPlate(image)
-grayIm = rgb2gray(image); %Create a grayscale image
-%**********************************
-%Calculate threshold value of the grayscale image
-[~, threshold] = edge(grayIm, 'sobel');
+function [colorPlate, binaryPlate] = getPlate(img)
 
-%Create a binary mask (binary image with only the edges being 1)
-fudgeFactor = .5;
-mask = edge(grayIm,'sobel', threshold * fudgeFactor); 
+%Set threshold values
+sThresh = [0.4 1];      % (Only image 2 does not work with these, as it makes 2 parts of the plate)
+vThresh = [0.1 1];
 
-%Creates a linear structuring element that is symmetric with respect to the 
-%  neighborhood center. 90 specifies the angle (in degrees) of the line as 
-%  measured in a counterclockwise direction from the horizontal axis. 
-%  2 is approximately the distance between the centers of the structuring 
-%  element members at opposite ends of the line.
-se90 = strel('line', 2, 90); 
-se0 = strel('line', 2, 0);
+%Set to HSV
+hsv = rgb2hsv(img);
+hue = round(hsv(:,:,1)*360);
+sat = hsv(:,:,2);
+val = hsv(:,:,3);
 
-%Create a dilated image from the binary edge image
-dilatedIm = imdilate(mask, [se90 se0]);
+%Use the theshold values
+thresh = (sat>=sThresh(1))&(sat<=sThresh(2))&(val>=vThresh(1))&(val<=vThresh(2));
 
-%Suppress light structures connected to image border
-noBorders = imclearborder(dilatedIm, 4);
+%Keep the yellow parts
+yellow = ((hue>30)&(hue<=70))&thresh;
 
-%Fill the holes in the middle of the image
-filledHoles = imfill(noBorders, 'holes'); 
+%Get the biggest area
+st = regionprops(yellow, 'Area', 'BoundingBox'); 
+[~,n] = max( [st.Area] );
 
-%Suppress light structures connected to image border again
-noBorders = imclearborder(filledHoles, 4);
+%Get the coordinates of that area
+array = [st.BoundingBox];
+begin = n + (3*(n-1));
+rect = [array(begin) array(begin+1) array(begin+2) array(begin+3)];
 
-%Creates a diamond-shaped structuring element, 
-%  where 1 is the distance from the structuring element origin to the points of the diamond.
-seD = strel('diamond',1); 
-
-%Erode the image
-erodedFirst = imerode(noBorders,seD);
-
-%Extracts all connected components (objects) from the binary image BW,
-%  where the area of the objects is in range 1
-%  (thus, gets a binary image of a filled license plate)
-filledPlate = bwareafilt(erodedFirst,1);
-
-%Multiply the grayscale image with the segmented image to get visible license plate
-plate = immultiply(filledPlate,grayIm); 
-
+%Crop the image to the plate
+colorPlate = imcrop(img,rect);
+binaryPlate = imcrop(yellow,rect);
 end

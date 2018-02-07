@@ -1,8 +1,0 @@
-#sobel 
-https://nl.mathworks.com/help/images/examples/detecting-a-cell-using-image-segmentation.html
-
-#text detection
-https://nl.mathworks.com/help/vision/examples/automatically-detect-and-recognize-text-in-natural-images.html
-
-#license plate recognition
-https://www.ijireeice.com/upload/2014/august/IJIREEICE3G%20a%20ragini%20RECOGNITION%20OF%20VEHICLE%20NUMBER%20PLATE%20USING%20MATLAB.pdf

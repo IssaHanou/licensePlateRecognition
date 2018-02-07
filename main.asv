@@ -1,3 +1,0 @@
-img = imread('images/1.JPG');
-B = adjustedImage(img);
-C = imfuse(A,B)
