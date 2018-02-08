@@ -3,7 +3,8 @@ function letters = getAlphabet(width,height)
 %0,1,2,3,4,5,6,7,8,9,B,D,F,G,H,J,K,L,N,P,R,S,T,V,X,Z
 chars = [char(48:57),char(66),char(68),char(70:72),char(74:76),char(78),char(80),char(82:84),char(86),char(88),char(90)];
 
-letters = zeros(1980,length(chars));
+featuresLength = 1980;
+letters = zeros(length(chars),featuresLength);
     
 for i=1:length(chars)
     %Create file name string
@@ -21,5 +22,5 @@ for i=1:length(chars)
     %Resize the image to the standard sizes
     image = imresize(image, [height,width]);
     features = extractHOGFeatures(image);
-    letters(:,i) = features;
+    letters(i,:) = features;
 end    

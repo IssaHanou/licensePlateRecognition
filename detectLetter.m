@@ -18,7 +18,8 @@ features = extractHOGFeatures(image);
 diffArray = zeros(length(chars),1);
 
 for i=1:length(chars)
-    diffArray = sum(abs(features - alphabet(i,:)));
+    difference = abs(features - alphabet(i,:));
+    diffArray(i) = sum(difference);
 end
 
 %Return the letter with the minimal difference to the current image

@@ -17,9 +17,10 @@ end
 
 %Crop the plate after rotation, depending on angle of rotation
 plateIm = cropToPlate(colorRot, angle);
+plateString = 'AA-BB-33';
 % figure
 % imshow(plateIm);
-plateString = 'AA-BB-33';
+
 
 
 %Get the average height and width from a letter picture
@@ -29,7 +30,7 @@ height = 100;
 %m = 36: first all numbers 0-9 then all letters A-Z
 %n = 1980: the length of the hog features array
 alphabet = getAlphabet(width,height);
-letter = detectLetter(img,alphabet,width,heigth);
+letter = detectLetter(img,alphabet,width,height);
 
 end
 
