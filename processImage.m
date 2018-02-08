@@ -10,7 +10,7 @@ img = imresize(image,[400 NaN]);
 
 %Crop the plate after rotation, depending on angle of rotation
 plateIm = cropToPlate(colorRot, angle);
-figure;
-imshow(colorPlate)
+figure
+imshowpair(colorPlate, binaryPlate, 'montage');
 plateString = 'AA-BB-33';
 end
