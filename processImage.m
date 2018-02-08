@@ -22,7 +22,6 @@ plateIm = cropToPlate(colorRot, angle);
 plateString = 'AA-BB-33';
 end
 
-
 %ideas: 
 %1)compute all images for alphabet once
 %2)not max(area) but > thres - getPlate for two license plates
