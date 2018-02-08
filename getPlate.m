@@ -19,6 +19,9 @@ yellow = ((hue>30)&(hue<=70))&thresh;
 se = strel('disk',2);
 yellow = imclose(yellow, se);
 
+figure;
+imshow(yellow);
+title('yellow');
 %Get the biggest area
 st = regionprops(yellow, 'Area', 'BoundingBox'); 
 [~,n] = max( [st.Area] );
@@ -26,7 +29,8 @@ st = regionprops(yellow, 'Area', 'BoundingBox');
 %Get the coordinates of that area
 array = [st.BoundingBox];
 begin = n + (3*(n-1));
-rect = [array(begin) array(begin+1) array(begin+2) array(begin+3)];
+z = 0;
+rect = [array(begin)+z array(begin+1)+z array(begin+2)+z array(begin+3)+z];
 
 %Crop the image to the plate
 colorPlate = imcrop(img,rect);
