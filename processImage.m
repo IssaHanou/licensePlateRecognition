@@ -1,4 +1,4 @@
-image = imread('images/13.JPG');
+function [plateIm, plateString] = processImage(image)
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]);
 
@@ -9,6 +9,8 @@ img = imresize(image,[400 NaN]);
 [colorRot,angle] = rotateImg(colorPlate,binaryPlate);
 
 %Crop the plate after rotation, depending on angle of rotation
-onlyPlate = cropToPlate(colorRot, angle);
-figure;
-imshow(onlyPlate)
+plateIm = cropToPlate(colorRot, angle);
+% figure;
+% imshow(onlyPlate)
+plateString = 'AA-BB-33';
+end
