@@ -1,5 +1,4 @@
 function [colorPlate, binaryPlate] = getPlate(img)
-
 %Set threshold values
 sThresh = [0.4 1];      % (Only image 2 does not work with these, as it makes 2 parts of the plate)
 vThresh = [0.1 1];
@@ -15,6 +14,10 @@ thresh = (sat>=sThresh(1))&(sat<=sThresh(2))&(val>=vThresh(1))&(val<=vThresh(2))
 
 %Keep the yellow parts
 yellow = ((hue>30)&(hue<=70))&thresh;
+
+%Make sure the plate is not split, 'glue' pixels close to each other
+se = strel('disk',2);
+yellow = imclose(yellow, se);
 
 %Get the biggest area
 st = regionprops(yellow, 'Area', 'BoundingBox'); 

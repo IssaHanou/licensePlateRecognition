@@ -101,18 +101,18 @@ while(hasFrame(handles.vidObj))
     timeStamps(end+1) = handles.vidObj.CurrentTime;
     
     if (mod(frameCount,10) == 0)        %Do only if you want less frames
-        %Get the new plate image and license plate string
-        [newPlate, plateImage] = processImage(vidFrame);
-        
         %Update the frames in the video
         axes(handles.axes1);
         h = get(handles.axes1, 'Children');
         set(h, 'CData', vidFrame);
         guidata(hObject,handles);
         
+        %Get the new plate image and license plate string
+        [newPlate, plateImage] = processImage(vidFrame);
+        
         %Display the current plate that was detected        
-%         axes(handles.axes3);
-%         image(plateImage);
+        axes(handles.axes3);
+        image(plateImage);
         
         if ~isempty(newPlate)
             %Get old data from the table
