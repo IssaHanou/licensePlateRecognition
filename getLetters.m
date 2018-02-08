@@ -82,4 +82,12 @@ else
     pos1 = temp1+1;
     pos2 = temp2+2;
 end
+
+%Make sure pos1 < pos2
+if pos1 > pos2
+    tmp = pos1;
+    pos1 = pos2;
+    pos2 = tmp;
+end
+
 end

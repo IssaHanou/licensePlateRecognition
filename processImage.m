@@ -1,5 +1,4 @@
-%function [plateString, plateIm] = processImage(image)
-image = imread('images/2.JPG');
+function [plateString, plateIm] = processImage(image)
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]);
 
@@ -17,22 +16,23 @@ end
 
 %Crop the plate after rotation, depending on angle of rotation
 plateIm = cropToPlate(colorRot, angle);
-figure;
-imshow(plateIm);
 
 %Crop to get all letters of the plate
 [img1, img2, img3, img4, img5, img6, pos1, pos2] = getLetters(plateIm);
 
-%Get the average height and width from a letter picture
-width = 50;
-height = 100;
-%Get the hog features for all chars: m x n matrix: 
-%m = 36: first all numbers 0-9 then all letters A-Z
-%n = 1980: the length of the hog features array
-alphabet = getAlphabet(width,height);
-letter = detectLetter(img,alphabet,width,height);
+%Check if pos are possible stripe positions and if none of the images is
+%'0', if everything is good return true, if something is off, return false
+checker = checkGetLetters(img1,img2,img3,img4,img5,img6,pos1,pos2);
+if checker == false
+    plateString = '';
+    plateIm = -1;
+    return
+end
+    
+license = createLicensePlate(img1,img2,img3,img4,img5,img6,pos1,pos2);
 
-plateString = 'AA-BB-33';
+plateString = license;
+end
 
 %end
 
