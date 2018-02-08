@@ -110,9 +110,9 @@ while(hasFrame(handles.vidObj))
         set(h, 'CData', vidFrame);
         guidata(hObject,handles);
         
-        %Display the current plate that was detected
-        axes(handles.axes3);
-        image(plateImage);
+        %Display the current plate that was detected        
+%         axes(handles.axes3);
+%         image(plateImage);
         
         if ~isempty(newPlate)
             %Get old data from the table
