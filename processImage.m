@@ -1,5 +1,5 @@
 %function [plateString, plateIm] = processImage(image)
-image = imread('images/13.JPG');
+image = imread('images/2.JPG');
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]);
 
@@ -17,25 +17,11 @@ end
 
 %Crop the plate after rotation, depending on angle of rotation
 plateIm = cropToPlate(colorRot, angle);
+figure;
+imshow(plateIm);
 
-[img1, img2, img3, img4, img5, img6] = getLetters(plateIm);
-figure;
-imshow(img1);
-figure;
-imshow(img2);
-figure;
-imshow(img3);
-figure;
-imshow(img4);
-figure;
-imshow(img5);
-figure;
-imshow(img6);
-plateString = 'AA-BB-33';
-% figure
-% imshow(plateIm);
-
-
+%Crop to get all letters of the plate
+[img1, img2, img3, img4, img5, img6, pos1, pos2] = getLetters(plateIm);
 
 %Get the average height and width from a letter picture
 width = 50;
@@ -45,6 +31,8 @@ height = 100;
 %n = 1980: the length of the hog features array
 alphabet = getAlphabet(width,height);
 letter = detectLetter(img,alphabet,width,height);
+
+plateString = 'AA-BB-33';
 
 %end
 
