@@ -117,8 +117,8 @@ while(hasFrame(handles.vidObj))
         [newPlate, plateImage] = processImage(vidFrame);
         
         %Display the current plate that was detected  
-        axes(handles.axes3);
-        if plateImage ~= -1   
+        if plateImage ~= 0
+            
             image(plateImage);
         end
         
