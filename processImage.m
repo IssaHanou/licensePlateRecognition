@@ -1,4 +1,5 @@
 function [plateString, plateIm] = processImage(image)
+%image = imread('images/4.JPG');
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]);
 
@@ -32,9 +33,9 @@ end
 license = createLicensePlate(img1,img2,img3,img4,img5,img6,pos1,pos2);
 
 plateString = license;
-end
+display(plateString);
 
-%end
+end
 
 %ideas: 
 %1)compute all images for alphabet once
