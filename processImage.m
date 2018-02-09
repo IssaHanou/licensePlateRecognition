@@ -18,6 +18,13 @@ end
 %Crop the plate after rotation, depending on angle of rotation
 plateIm = cropToPlate(colorRot, angle);
 
+%If no image was made, return nothing
+if isempty(plateIm)
+    plateString = '';
+    plateIm = -1;
+    return
+end
+
 %Crop to get all letters of the plate
 [img1, img2, img3, img4, img5, img6, pos1, pos2] = getLetters(plateIm);
 
@@ -30,7 +37,15 @@ if checker == false
     return
 end
     
-license = createLicensePlate(img1,img2,img3,img4,img5,img6,pos1,pos2);
+%To make sure all images are compared with same sizes
+height = 100;
+width = 50;
+%Compute the alphabets once
+alphabet = getAlphabet(width,height,1);
+numAlphabet = getAlphabet(width,height,2);
+letAlphabet = getAlphabet(width,height,3);
+
+license = createLicensePlate(img1,img2,img3,img4,img5,img6,pos1,pos2,alphabet,numAlphabet,letAlphabet,width,height);
 
 plateString = license;
 display(plateString);
