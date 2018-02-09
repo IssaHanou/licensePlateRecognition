@@ -133,14 +133,14 @@ while(hasFrame(handles.vidObj))
     end
     frameCount = frameCount + 1;
 end
-%Display duration of vidoe + processing
-duration = toc(start);
-disp(duration);
-
 %Get the output from the table
 tableData = get(handles.uitable1, 'Data');
 %results = getFinalData(tableData);
 checkSolution(tableData, solutionFile);
+
+%Display duration of vidoe + processing
+duration = toc(start);
+display(duration);
 
 
 % --- Executes when user attempts to close figure1.
