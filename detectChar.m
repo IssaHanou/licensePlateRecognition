@@ -1,4 +1,4 @@
-function letter = detectChar(img, alphabet, width, height,num) 
+function letter = detectChar(img, alphabet, width, height, num) 
 if num == 1
     %Dutch plates don't have: A,C,E,I,M,O,Q,U,W,Y  
     %0,1,2,3,4,5,6,7,8,9,B,D,F,G,H,J,K,L,N,P,R,S,T,V,X,Z
@@ -28,4 +28,7 @@ end
 %Return the letter with the minimal difference to the current image
 [minimum,index] = min(diffArray);
 letter = chars(index);
+
+%Check edge case letters
+letter = checkLetter(letter, img, alphabet);
 end
