@@ -117,10 +117,10 @@ while(hasFrame(handles.vidObj))
         [newPlate, plateImage] = processImage(vidFrame);
         
         %Display the current plate that was detected  
-        axes(handles.axes3);
-        if plateImage ~= -1   
-            image(plateImage);
-        end
+%         axes(handles.axes3);
+%         if plateImage ~= -1   
+%             image(plateImage);
+%         end
         
         if ~isempty(newPlate)
             %Get old data from the table

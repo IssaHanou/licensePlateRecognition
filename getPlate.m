@@ -13,7 +13,7 @@ val = hsv(:,:,3);
 thresh = (sat>=sThresh(1))&(sat<=sThresh(2))&(val>=vThresh(1))&(val<=vThresh(2));
 
 %Keep the yellow parts
-yellow = ((hue > 14) & (hue<=70)) & thresh;
+yellow = ((hue > 13) & (hue<=70)) & thresh;
 
 %Make sure the plate is not split, 'glue' pixels close to each other
 se = strel('disk',2);
