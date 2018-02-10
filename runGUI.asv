@@ -122,27 +122,14 @@ while(hasFrame(handles.vidObj))
 %             image(plateImage);
 %         end
         
-        if ~isempty(newPlate) && isstring(newPlate) == 0
+        if ~isempty(newPlate) && isString(newPlate) 
             %Get old data from the table
             data = get(handles.uitable1, 'Data');
     
             %Add the new plate to the table data
             newData = [data; {newPlate, frameCount, timeStamps(frameCount)}];
             set(handles.uitable1, 'Data', newData); 
-        elseif ~isempty(newPlate) && length(newPlate) == 2
-            %Get old data from the table
-            data = get(handles.uitable1, 'Data');
-            
-            plate1 = newPlate(1);
-            plate2 = newPlate(2);
-            
-            %Add the first plate to the table data
-            newData = [data; {plate1, frameCount, timeStamps(frameCount)}];
-            %Add the second plate to the table data
-            finalData = [newData; {plate2, frameCount, timeStamps(frameCount)}];
-            
-            %Put new data in the table
-            set(handles.uitable1, 'Data', finalData); 
+        elseif ~isempty(newPlate) &&
         end
     end
     frameCount = frameCount + 1;

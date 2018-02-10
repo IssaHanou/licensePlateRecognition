@@ -4,7 +4,7 @@ function [plateString, plateIm] = processImage(image)
 img = imresize(image,[400 NaN]);
 
 %Get the plate out of the image
-[colorPlate,binaryPlate,colorPlate2,binaryPlate2] = getPlate(img);
+[colorPlate,binaryPlate,colorPlate2,binar] = getPlate(img);
 %If no plate was found, return zeroes.
 if colorPlate == 0
     plateIm = -1;
@@ -12,8 +12,11 @@ if colorPlate == 0
     return
 end
 
-%There is just one plate
-if colorPlate2 == 0
+%There are two plates
+if colorPlate2 ~= 0
+    [plateString,plateIm] = processTwoPlates(colorPlate,binaryPlate,colorPlate2,binaryPlate2);
+else
+
     %Rotate the plate to get it horizontal
     [colorRot,angle] = rotateImg(colorPlate,binaryPlate);
 
@@ -51,8 +54,6 @@ if colorPlate2 == 0
 
     plateString = license;
     display(plateString);
-else %there are two plates
-    [plateString,plateIm] = processTwoPlates(colorPlate,binaryPlate,colorPlate2,binaryPlate2);
 end
 end
 
