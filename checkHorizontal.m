@@ -1,13 +1,23 @@
 function letter = checkHorizontal(img)
-tol = 8;
+tol = 10;
 [~,ang] = imgradient(img);
-out = (ang >= 180 - tol | ang <= -180 + tol);
-labeled = label(out);
+out = ((ang >= 90 - tol) & (ang <= 90 + tol)) | ((ang <= -90 + tol) & (ang >= -90 - tol));
+a = imclearborder(out);
+b = a == 1;
+labeled = label(b);
 data = measure(out,labeled,{'Perimeter'});
-sticks = find(data.perimeter > 11);
-if isempty(sticks)
+sticks = find(data.perimeter > 15);
+%sticks includes straight lines with a perimeter > 15.
+%if the y of that stick is in the upper part of the picture it's a 7 else
+%it's a 2
+if isemtpy(sticks)
     letter = '3';
-else
-    letter = '1';
+elseif length(sticks) == 1
+    [y,~] = size(labeled(sticks));
+    if y > 40
+        letter = '7';
+    else
+        letter = '2';
+    end
 end
 end
