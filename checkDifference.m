@@ -1,27 +1,25 @@
-function letter = checkDifference(img)
-%COMPUTE THIS STATIC FOR ALL LETTERS
-chars = [];
-diffArray = zeros(length(chars),1);
+function letter = checkDifference(img, alphabet, num)
+if num == 1
+    %Only numbers
+    chars = [char(48:57)];
+elseif num == 2
+    %Only possible dutch letters
+    chars = [char(66),char(68),char(70:72),char(74:76),char(78),char(80),char(82:84),char(86),char(88),char(90)];
+end
 
+img = imbinarize(img);
 
-%Create file name string
-string = 'lettersNumbers/';
-current = chars(i);
-string = strcat(string,current);
-string = strcat(string,'.PNG');
-
-%Read in the image and convert it to binary image, with white character 
-im = imread(string);
-grayIm = rgb2gray(im);
-bin = grayIm & 1;
-white = bin == 0;
-
-%Resize the image to the same size as the image found in the plate
-resizedImage = resizeImage(white, binaryIm, grayIm);
-    
-data = measure(resizedImage,label(resizedImage),{'Perimeter','Size','Gravity'});
+data = measure(img,label(img),{'Perimeter','Size'});
 [dataPer,index] = max(data.perimeter);
 dataSize = data.size(index);
-diff = abs(checkPer/checkSize - dataPer/dataSize);
-diffArray(i) = diff;
+diff = dataPer/dataSize;
+
+diffArray = zeros(length(chars),1);
+for i=1:length(chars)
+    diffArray(i) = sum(abs(diff - alphabet(i)));
+end
+
+%Return the letter with the minimal difference to the current image
+[~,index] = min(diffArray);
+letter = chars(index);
 end

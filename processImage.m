@@ -44,8 +44,12 @@ width = 50;
 alphabet = getAlphabet(width,height,1);
 numAlphabet = getAlphabet(width,height,2);
 letAlphabet = getAlphabet(width,height,3);
+diffNumAlphabet = getDiffAlphabet(width,height,1);
+diffLetAlphabet = getDiffAlphabet(width,height,2);
+[img1,img2,img3,img4,img5,img6] = resizeImages(img1,img2,img3,img4,img5,img6,width,height);
 
-license = createLicensePlate(img1,img2,img3,img4,img5,img6,pos1,pos2,alphabet,numAlphabet,letAlphabet,width,height);
+
+license = createLicensePlate(img1,img2,img3,img4,img5,img6,pos1,pos2,alphabet,numAlphabet,letAlphabet,diffNumAlphabet,diffLetAlphabet);
 
 plateString = license;
 display(plateString);

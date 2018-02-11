@@ -1,4 +1,4 @@
-function letter = checkHorizontal(img)
+function letter = checkHorizontal(img, letter)
 tol = 10;
 [~,ang] = imgradient(img);
 %Get parts with an angle of 90, then they're horizontal
@@ -11,7 +11,7 @@ sticks = find(data.perimeter > 15);
 %sticks includes straight lines with a perimeter > 15.
 %if the y of that stick is in the upper part of the picture it's a 7 else
 %it's a 2. 3 has no horizontal sticks
-if isemtpy(sticks)
+if isempty(sticks)
     letter = '3';
 elseif length(sticks) == 1
     [y,~] = size(labeled(sticks));

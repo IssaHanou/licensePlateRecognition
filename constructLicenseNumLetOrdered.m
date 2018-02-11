@@ -1,4 +1,4 @@
-function license = constructLicenseNumLetOrdered(img1,img2,img3,img4,img5,img6,pos1,pos2,letters,numAlphabet,letAlphabet,width,height)
+function license = constructLicenseNumLetOrdered(img1,img2,img3,img4,img5,img6,pos1,pos2,letters,numAlphabet,letAlphabet,diffNumAlphabet,diffLetAlphabet)
 n1 = 0;
 n2 = 0;
 n3 = 0;
@@ -38,11 +38,11 @@ if and(pos1==3,pos2==7)
         end
         if p == n1 || p == n2 || p == n3
             if ismember(letters(p),numbers) == 0
-                letters(p) = detectChar(im, numAlphabet, width, height, 2);
+                letters(p) = detectChar(im, numAlphabet, diffNumAlphabet, diffLetAlphabet, 2);
             end
         else
             if ismember(letters(p),numbers) == 1
-                letters(p) = detectChar(im, letAlphabet, width, height, 3);
+                letters(p) = detectChar(im, letAlphabet, diffNumAlphabet, diffLetAlphabet, 3);
             end
         end
     end
@@ -77,11 +77,11 @@ elseif and(pos1==3,pos2==6)
         end
         if p == n1 || p == n2
             if ismember(letters(p),numbers) == 0
-                letters(p) = detectChar(im, numAlphabet, width, height, 2);
+                letters(p) = detectChar(im, numAlphabet, diffNumAlphabet, diffLetAlphabet, 2);
             end
         else
             if ismember(letters(p),numbers) == 1
-                letters(p) = detectChar(im, letAlphabet, width, height, 3);
+                letters(p) = detectChar(im, letAlphabet, diffNumAlphabet, diffLetAlphabet, 3);
             end
         end
     end
@@ -120,11 +120,11 @@ elseif and(pos1==2,pos2==6)
         end
         if p == n1 || p == n2 || p == n3
             if ismember(letters(p),numbers) == 0
-                letters(p) = detectChar(im, numAlphabet, width, height, 2);
+                letters(p) = detectChar(im, numAlphabet, diffNumAlphabet, diffLetAlphabet, 2);
             end
         else
-            if ismember(letters(p),numbers) == 1
-                letters(p) = detectChar(im, letAlphabet, width, height, 3);
+            if ismember(letters(p),numbers) == 6
+                letters(p) = detectChar(im, letAlphabet, diffNumAlphabet, diffLetAlphabet, 3);
             end
         end
     end

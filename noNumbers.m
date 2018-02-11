@@ -1,6 +1,6 @@
 function license = noNumbers(license,pos1,pos2)
-nums = getPossibleChars(2);
-lets = getPossibleChars(1);
+nums = [char(48:57)];;
+lets = [char(66),char(68),char(70:72),char(74:76),char(78),char(80),char(82:84),char(86),char(88),char(90)];
 allNums = true;
 allLets = true;
 for i=1:length(license)
