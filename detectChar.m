@@ -29,6 +29,6 @@ end
 [minimum,index] = min(diffArray);
 letter = chars(index);
 
-%Check edge case letters
-letter = checkLetter(letter, img, alphabet);
+%Check edge case letters - using the resized image
+letter = checkLetter(letter, image, alphabet);
 end
