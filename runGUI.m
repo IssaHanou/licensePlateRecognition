@@ -68,7 +68,7 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
-[filename pathname] = uigetfile('*avi', 'Pick AVI file');
+[filename, pathname] = uigetfile('*avi', 'Pick AVI file');
 vidObj = VideoReader(fullfile(pathname, filename));
 
 %Read in the video
@@ -116,7 +116,7 @@ while(hasFrame(handles.vidObj))
     %Add current time to the timeStamps array
     timeStamps(end+1) = handles.vidObj.CurrentTime;
     
-    if (mod(frameCount,10) == 0)        %Do only if you want less frames
+    if (mod(frameCount,5) == 0)        %Do only if you want less frames
         %Update the frames in the video
         axes(handles.axes1);
         h = get(handles.axes1, 'Children');

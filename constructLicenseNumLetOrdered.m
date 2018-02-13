@@ -89,15 +89,15 @@ elseif and(pos1==3,pos2==6)
     end
     license = [letters(1),letters(2),'-',letters(3),letters(4),'-',letters(5),letters(6)];
 elseif and(pos1==2,pos2==6)
-    if and(ismember(letters(1),numbers) == 1,ismember(letters(5),numbers) == 1) || and(ismember(letters(1),numbers) == 1,ismember(letters(6),numbers) == 1) | and(ismember(letters(6),numbers) == 1, ismember(letters(5),numbers) == 1)
+    if and(ismember(letters(1),numbers) == 1,ismember(letters(5),numbers) == 1) || and(ismember(letters(1),numbers) == 1,ismember(letters(6),numbers) == 1) || and(ismember(letters(6),numbers) == 1, ismember(letters(5),numbers) == 1)
         n1 = 1;
         n2 = 5;
         n3 = 6;
-    elseif and(ismember(letters(3),numbers) == 1,ismember(letters(4),numbers) == 1) || and(ismember(letters(3),numbers) == 1,ismember(letters(2),numbers) == 1) | and(ismember(letters(4),numbers) == 1,ismember(letters(2),numbers) == 1)
+    elseif and(ismember(letters(3),numbers) == 1,ismember(letters(4),numbers) == 1) || and(ismember(letters(3),numbers) == 1,ismember(letters(2),numbers) == 1) || and(ismember(letters(4),numbers) == 1,ismember(letters(2),numbers) == 1)
         n1 = 3;
         n2 = 4;
         n3 = 2;
-    elseif ismember(letters(1),numbers) == 1 | ismember(letters(2),numbers) == 1 | ismember(letters(6),numbers) == 1
+    elseif ismember(letters(1),numbers) == 1 || ismember(letters(2),numbers) == 1 || ismember(letters(6),numbers) == 1
         n1 = 1;
         n2 = 5;
         n3 = 6;

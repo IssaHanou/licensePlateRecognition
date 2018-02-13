@@ -1,6 +1,5 @@
 %function [img1, img2, img3, img4, img5, img6, pos1, pos2] = getLetters(img, sizes, alphabet)
 function license = getLetters(img, sizes, alphabet)
-
 %Set default
 img1 = 0;
 img2 = 0;
@@ -110,5 +109,10 @@ if endAt ~= 15
     end
 end
 
+checker = checkGetLetters(img1,img2,img3,img4,img5,img6,pos1,pos2);
+if checker == false
+    license = -1;
+    return
+end
 license = constructLicenseNumLetOrdered(img1,img2,img3,img4,img5,img6,pos1,pos2,letters,alphabet);
 end

@@ -1,10 +1,10 @@
-%function [plateString, plateIm] = processImage(image, sizes, alphabet)
+function [plateString, plateIm] = processImage(image, sizes, alphabet)
 %For debuggin purposes
-image = imread('images/4.JPG');
-height = 100;
-width = 50;
-sizes = [height, width];
-alphabet = getAlphabet(width,height,1);
+% image = imread('images/4.JPG');
+% height = 100;
+% width = 50;
+% sizes = [height, width];
+% alphabet = getAlphabet(width,height,1);
 
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]);
@@ -34,7 +34,11 @@ end
 %Crop to get all letters of the plate
 %[img1, img2, img3, img4, img5, img6, pos1, pos2] = getLetters(plateIm, sizes, alphabet);
 license = getLetters(plateIm, sizes, alphabet);
-
+if license == -1
+    plateString = '';
+    plateIm = -1;
+    return
+end
 %Check if pos are possible stripe positions and if none of the images is
 %'0', if everything is good return true, if something is off, return false
 % checker = checkGetLetters(img1,img2,img3,img4,img5,img6,pos1,pos2);
@@ -52,7 +56,7 @@ license = getLetters(plateIm, sizes, alphabet);
 plateString = license;
 display(plateString);
 
-%end
+end
 
 %ideas: 
 %1)compute all images for alphabet once
