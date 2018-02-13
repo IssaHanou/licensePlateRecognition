@@ -29,14 +29,9 @@ if n == 0
     binaryPlate = 0;
 else
     %Get the coordinates of that area
-    array = [st.BoundingBox];
-    %%%%%%a = st(n).BoundingBox
-    %%%%%%imcrop(img,a);
-    begin = n + (3*(n-1));
-    z = 0;
-    rect = [array(begin)+z array(begin+1)+z array(begin+2)+z array(begin+3)+z];
+    a = st(n).BoundingBox;
     %Crop the image to the plate
-    colorPlate = imcrop(img,rect);
-    binaryPlate = imcrop(yellow,rect);
+    colorPlate = imcrop(img,a);
+    binaryPlate = imcrop(yellow,a);
 end
 end
