@@ -99,6 +99,16 @@ axes(handles.axes1);
 %Save start time
 start = tic;
 
+%We compute these values once to reduce computation times
+%To make sure all images are compared with same sizes
+height = 100;
+width = 50;
+sizes = [height, width];
+%Compute the alphabets once
+alphabet = getAlphabet(width,height,1);
+%numAlphabet = getAlphabet(width,height,2);
+%letAlphabet = getAlphabet(width,height,3);
+
 %Keep getting frames till no more frames are left
 while(hasFrame(handles.vidObj))
     vidFrame = readFrame(handles.vidObj);
@@ -114,7 +124,7 @@ while(hasFrame(handles.vidObj))
         guidata(hObject,handles);
         
         %Get the new plate image and license plate string
-        [newPlate, plateImage] = processImage(vidFrame);
+        [newPlate, plateImage] = processImage(vidFrame, sizes, alphabet);
         
         %Display the current plate that was detected  
 %         axes(handles.axes3);

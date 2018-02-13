@@ -1,8 +1,10 @@
-function license = constructLicenseNumLetOrdered(img1,img2,img3,img4,img5,img6,pos1,pos2,letters,numAlphabet,letAlphabet,width,height)
+function license = constructLicenseNumLetOrdered(img1,img2,img3,img4,img5,img6,pos1,pos2,letters,alphabet)
+numAlphabet = alphabet(1:10,:);
+letAlphabet = alphabet(11:26,:);
 n1 = 0;
 n2 = 0;
 n3 = 0;
-numbers = [char(48:57)];
+numbers = char(48:57);
 
 if and(pos1==3,pos2==7)
     if and(ismember(letters(1),numbers) == 1,ismember(letters(2),numbers) == 1) || and(ismember(letters(1),numbers) == 1,ismember(letters(6),numbers) == 1) || and(ismember(letters(6),numbers) == 1, ismember(letters(2),numbers) == 1)
@@ -38,11 +40,11 @@ if and(pos1==3,pos2==7)
         end
         if p == n1 || p == n2 || p == n3
             if ismember(letters(p),numbers) == 0
-                letters(p) = detectChar(im, numAlphabet, width, height, 2);
+                letters(p) = detectChar(im, numAlphabet, 2);
             end
         else
             if ismember(letters(p),numbers) == 1
-                letters(p) = detectChar(im, letAlphabet, width, height, 3);
+                letters(p) = detectChar(im, letAlphabet, 3);
             end
         end
     end
@@ -77,11 +79,11 @@ elseif and(pos1==3,pos2==6)
         end
         if p == n1 || p == n2
             if ismember(letters(p),numbers) == 0
-                letters(p) = detectChar(im, numAlphabet, width, height, 2);
+                letters(p) = detectChar(im, numAlphabet, 2);
             end
         else
             if ismember(letters(p),numbers) == 1
-                letters(p) = detectChar(im, letAlphabet, width, height, 3);
+                letters(p) = detectChar(im, letAlphabet, 3);
             end
         end
     end
@@ -120,11 +122,11 @@ elseif and(pos1==2,pos2==6)
         end
         if p == n1 || p == n2 || p == n3
             if ismember(letters(p),numbers) == 0
-                letters(p) = detectChar(im, numAlphabet, width, height, 2);
+                letters(p) = detectChar(im, numAlphabet, 2);
             end
         else
             if ismember(letters(p),numbers) == 1
-                letters(p) = detectChar(im, letAlphabet, width, height, 3);
+                letters(p) = detectChar(im, letAlphabet, 3);
             end
         end
     end

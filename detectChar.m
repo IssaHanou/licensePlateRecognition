@@ -1,4 +1,4 @@
-function letter = detectChar(img, alphabet, width, height,num) 
+function letter = detectChar(image, alphabet, num) 
 if num == 1
     %Dutch plates don't have: A,C,E,I,M,O,Q,U,W,Y  
     %0,1,2,3,4,5,6,7,8,9,B,D,F,G,H,J,K,L,N,P,R,S,T,V,X,Z
@@ -10,9 +10,6 @@ elseif num == 3
     %Only possible dutch letters
     chars = [char(66),char(68),char(70:72),char(74:76),char(78),char(80),char(82:84),char(86),char(88),char(90)];
 end
-
-%Resize the image to the standard sizes
-image = imresize(img, [height,width]);
 
 %Get the hog features of this image
 features = extractHOGFeatures(image);
@@ -26,6 +23,6 @@ for i=1:length(chars)
 end
 
 %Return the letter with the minimal difference to the current image
-[minimum,index] = min(diffArray);
+[~,index] = min(diffArray);
 letter = chars(index);
 end

@@ -1,6 +1,4 @@
-%function [img1, img2, img3, img4, img5, img6, pos1, pos2] = getLetters(img, sizes, alphabet)
-function license = getLetters(img, sizes, alphabet)
-
+function [img1, img2, img3, img4, img5, img6, pos1, pos2] = getLetters(img, sizes, alphabet)
 %Set default
 img1 = 0;
 img2 = 0;
@@ -59,31 +57,31 @@ if endAt ~= 15
         if p == 1
             img1 = imcrop(img, [xcoor(k) ycoor(k) width(k) height(k)]);
             img1 = imresize(img1, sizes);
-            letters(1) = detectChar(img1, alphabet, 1);
+            letters(1) = detectChar(img1, alphabet, sizes, 1);
         elseif p == 2
             img2 = imcrop(img, [xcoor(k) ycoor(k) width(k) height(k)]);
             img2 = imresize(img2, sizes);
-            letters(2) = detectChar(img2, alphabet, 1);
+            letters(2) = detectChar(img2, alphabet, sizes, 1);
             dist(1) = xcoor(k) - prev;
         elseif p == 3
             img3 = imcrop(img, [xcoor(k) ycoor(k) width(k) height(k)]);
             img3 = imresize(img3, sizes);
-            letters(3) = detectChar(img3, alphabet, 1);
+            letters(3) = detectChar(img3, alphabet, sizes, 1);
             dist(2) = xcoor(k) - prev;
         elseif p == 4
             img4 = imcrop(img, [xcoor(k) ycoor(k) width(k) height(k)]);
             img4 = imresize(img4, sizes);
-            letters(4) = detectChar(img4, alphabet, 1);
+            letters(4) = detectChar(img4, alphabet, sizes, 1);
             dist(3) = xcoor(k) - prev;
         elseif p == 5
             img5 = imcrop(img, [xcoor(k) ycoor(k) width(k) height(k)]);
             img5 = imresize(img5, sizes);
-            letters(5) = detectChar(img5, alphabet, 1);
+            letters(5) = detectChar(img5, alphabet, sizes, 1);
             dist(4) = xcoor(k) - prev;
         elseif p == 6
             img6 = imcrop(img, [xcoor(k) ycoor(k) width(k) height(k)]);
-            img6 = imresize(img6, sizes);
-            letters(6) = detectChar(img6, alphabet, 1);
+            img6 = imresize(img6, size);
+            letters(6) = detectChar(img6, alphabet, sizes, 1);
             dist(5) = xcoor(k) - prev;
         end
         xcoor(k) = intmax;
@@ -110,5 +108,5 @@ if endAt ~= 15
     end
 end
 
-license = constructLicenseNumLetOrdered(img1,img2,img3,img4,img5,img6,pos1,pos2,letters,alphabet);
+license = createLicensePlate(img1,img2,img3,
 end
