@@ -10,6 +10,8 @@ img6 = 0;
 pos1 = 0;
 pos2 = 0;
 letters = zeros(6,1);
+license = -1;
+numbers = char(48:57);
 
 %Make grayscale image
 img = rgb2gray(img);
@@ -109,10 +111,60 @@ if endAt ~= 15
     end
 end
 
-checker = checkGetLetters(img1,img2,img3,img4,img5,img6,pos1,pos2);
-if checker == false
-    license = -1;
+%If either one of the images is 0 (wasn't initialized), license is false
+if img1 == 0 
+    return
+elseif img2 == 0
+    return
+elseif img3 == 0
+    return
+elseif img4 == 0
+    return
+elseif img5 == 0
+    return
+elseif img6 == 0
     return
 end
-license = constructLicenseNumLetOrdered(img1,img2,img3,img4,img5,img6,pos1,pos2,letters,alphabet);
+
+%Get the positions of the numbers in the license plate
+[n1,n2,n3] = getNumFromPos(pos1,pos2,letters,numbers);
+if n1 == 0 && n2 == 0 && n3 == 0 %If the positions weren't right
+    return
+end
+
+%We have to do this for all six pictures
+for i=1:6
+    if i == 1
+        im = img1;
+    elseif i == 2
+        im = img2;
+    elseif i == 3
+        im = img3;
+    elseif i == 4
+        im = img4;
+    elseif i == 5
+        im = img5;
+    elseif i == 6
+        im = img6;
+    end
+    if n1 == i || n2 == i || n3 == i
+        %Make sure all numbers are numbers
+        if ismember(letters(i),numbers) == 0
+            letters(i) = detectChar(im, alphabet(1:10,:), 2);
+        end
+    else
+        %Make sure all letters are letters
+        if ismember(letters(i),numbers) == 1
+            letters(i) = detectChar(im, alphabet(11:26,:), 3);
+        end
+    end
+end
+
+if and(pos1 == 3, pos2 == 7)
+    license = [letters(1),letters(2),'-',letters(3),letters(4),letters(5),'-',letters(6)];
+elseif and(pos1 == 3, pos2 == 6)
+    license = [letters(1),letters(2),'-',letters(3),letters(4),'-',letters(5),letters(6)];
+else
+    license = [letters(1),'-',letters(2),letters(3),letters(4),'-',letters(5),letters(6)];
+end
 end

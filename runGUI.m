@@ -106,8 +106,6 @@ width = 50;
 sizes = [height, width];
 %Compute the alphabets once
 alphabet = getAlphabet(width,height,1);
-%numAlphabet = getAlphabet(width,height,2);
-%letAlphabet = getAlphabet(width,height,3);
 
 %Keep getting frames till no more frames are left
 while(hasFrame(handles.vidObj))

@@ -31,35 +31,14 @@ if isempty(plateIm)
     return
 end
 
-%Crop to get all letters of the plate
-%[img1, img2, img3, img4, img5, img6, pos1, pos2] = getLetters(plateIm, sizes, alphabet);
+%Crop to get all letters of the plate and construct the license string
 license = getLetters(plateIm, sizes, alphabet);
 if license == -1
     plateString = '';
     plateIm = -1;
     return
 end
-%Check if pos are possible stripe positions and if none of the images is
-%'0', if everything is good return true, if something is off, return false
-% checker = checkGetLetters(img1,img2,img3,img4,img5,img6,pos1,pos2);
-% if checker == false
-%     plateString = '';
-%     plateIm = -1;
-%     return
-% end
-%     
-% 
-% 
-% %%%%%calculate per letter
-% license = createLicensePlate(img1,img2,img3,img4,img5,img6,pos1,pos2,alphabet,numAlphabet,letAlphabet,width,height);
 
 plateString = license;
 display(plateString);
-
 end
-
-%ideas: 
-%1)compute all images for alphabet once
-%2)not max(area) but > thres - getPlate for two license plates
-%3)boundingboxes, when number isn't > thres - stop, if higher > 6 foreign
-%4)FIRST LETTERS: B, F, G, H, J, K, L, N, P, R, S, T, V, X en Z.
