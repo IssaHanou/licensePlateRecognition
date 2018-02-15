@@ -160,8 +160,6 @@ for i=1:6
     end
 end
 
-
-
 %Check there are no more than two of the same char in the license plate
 for i=1:6
     if numel(find(letters(i))) > 2
@@ -170,7 +168,7 @@ for i=1:6
     end
 end
 
-%Construct the license plate with the chars and stripes
+%Construct the license plate with the hc
 if and(pos1 == 3, pos2 == 7)
     license = [letters(1),letters(2),'-',letters(3),letters(4),letters(5),'-',letters(6)];
 elseif and(pos1 == 3, pos2 == 6)
