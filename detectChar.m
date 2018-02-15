@@ -25,4 +25,8 @@ end
 %Return the letter with the minimal difference to the current image
 [~,index] = min(diffArray);
 letter = chars(index);
+
+if letter == '1' || letter == '7'
+    checkVertical(image);
+end
 end
