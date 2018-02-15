@@ -36,9 +36,8 @@ license = getLetters(plateIm, sizes, alphabet);
 if license == -1
     plateString = '';
     plateIm = -1;
-    return
+else 
+    plateString = license;
+    display(plateString);
 end
-
-plateString = license;
-display(plateString);
 end
