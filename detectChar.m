@@ -26,7 +26,10 @@ end
 [~,index] = min(diffArray);
 letter = chars(index);
 
-if letter == '1' || letter == '7'
-    checkVertical(image);
+% if letter == '1' || letter == '7'
+%     letter = checkVertical(image,1);
+% end
+if letter == 'V' || letter == 'J'
+    letter = checkVertical(image,2);
 end
 end

@@ -1,6 +1,6 @@
 function [plateString, plateIm] = processImage(image, sizes, alphabet)
-%For debuggin purposes
-% image = imread('images/28.JPG');
+%For debugging purposes
+% image = imread('images/29.JPG');
 % height = 100;
 % width = 50;
 % sizes = [height, width];

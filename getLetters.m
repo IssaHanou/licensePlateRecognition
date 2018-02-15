@@ -36,7 +36,7 @@ while current ~= 7 && endAt ~= 15
     begin = n + (3*(n-1));
     z = 0;
     %If scale is ok, crop the image
-    if (array(begin+3)/array(begin+2)) > 1 & (array(begin+3)/array(begin+2)) < 4 && array(begin+3) > 10
+    if (array(begin+3)/array(begin+2)) > 1 & (array(begin+3)/array(begin+2)) < 4 & array(begin+3) > 10
         rect = [array(begin)+z array(begin+1)+z array(begin+2)+z array(begin+3)+z];
         %Save these coordinates
         xcoor(current) = array(begin);
