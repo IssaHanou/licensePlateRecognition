@@ -26,6 +26,9 @@ end
 [~,index] = min(diffArray);
 letter = chars(index);
 
+if letter == '0'
+    letter = checkEnclosedPerimeters(image,letter);
+end
 if letter == '1' || letter == '7'
     letter = checkVertical(image,1);
 end

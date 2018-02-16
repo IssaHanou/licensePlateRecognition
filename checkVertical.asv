@@ -6,7 +6,10 @@ out = (ang >= 180 - tol | ang <= -180 + tol);
 labeled = label(out);
 data = measure(out,labeled,{'Perimeter'});
 sticks = find(data.perimeter > 100);
-%7 and V have no vertical sticks
+img0 = imbinarize(img);
+data0 = measure(img0,label(img(0),{'Perimeter'});
+circles = fin(data0.pe
+%7 has no vertical sticks
 if isempty(sticks)
     if num == 1
         letter = '7';
@@ -14,7 +17,6 @@ if isempty(sticks)
         letter = 'V';
     end
 else
-    %J and 1 have a vertical stick
     if num == 1
         letter = '1';
     else 
