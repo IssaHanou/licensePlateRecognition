@@ -5,7 +5,7 @@ tol = 5;
 out = (ang >= 180 - tol | ang <= -180 + tol);
 labeled = label(out);
 data = measure(out,labeled,{'Perimeter'});
-sticks = find(data.perimeter > 100);
+sticks = find(data.perimeter > 110);
 %7 and V have no vertical sticks
 if isempty(sticks)
     if num == 1
