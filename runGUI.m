@@ -143,10 +143,10 @@ while(hasFrame(handles.vidObj))
 end
 %Get the output from the table
 tableData = get(handles.uitable1, 'Data');
-%checkSolution(tableData, solutionFile);
+checkSolution(tableData, solutionFile);
 %First process the solution to get most common solution per plate
-results = finalSolution(tableData);
-checkSolution(results, solutionFile);
+% results = getFinalTable(tableData);
+% checkSolution(results, solutionFile);
 
 %Display duration of vidoe + processing
 duration = toc(start);
