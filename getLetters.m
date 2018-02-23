@@ -36,7 +36,7 @@ while current ~= 7 && endAt ~= 15
     begin = n + (3*(n-1));
     z = 0;
     %If scale is ok, crop the image
-    if (array(begin+3)/array(begin+2)) > 1 & (array(begin+3)/array(begin+2)) < 4 && array(begin+3) > 10
+    if (array(begin+3)/array(begin+2)) > 1 & (array(begin+3)/array(begin+2)) < 4 & array(begin+3) > 10
         rect = [array(begin)+z array(begin+1)+z array(begin+2)+z array(begin+3)+z];
         %Save these coordinates
         xcoor(current) = array(begin);
@@ -160,6 +160,17 @@ for i=1:6
     end
 end
 
+
+
+%Check there are no more than two of the same char in the license plate
+for i=1:6
+    if numel(find(letters(i))) > 2
+        license = '';
+        return;
+    end
+end
+
+%Construct the license plate with the chars and stripes
 if and(pos1 == 3, pos2 == 7)
     license = [letters(1),letters(2),'-',letters(3),letters(4),letters(5),'-',letters(6)];
 elseif and(pos1 == 3, pos2 == 6)
