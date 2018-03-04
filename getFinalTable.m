@@ -1,5 +1,4 @@
 function finalTable = getFinalTable(tableData)
-%  tableData = [{'XS-NP-23',23,105.3};{'XS-NB-23',25,107.1};{'XS-NP-83',28,109.9};{'XS-NB-23',31,112.0};{'AB-291-T',482,1119.0};{'A8-291-1',492,1291.8}];
 % Set n to 1 to get the first license string out of the table
 n = 1; 
 finalTable = {'',0,0};

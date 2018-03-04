@@ -96,6 +96,7 @@ frameCount = 1;
 timeStamps = [];
 set(handles.uitable1, 'Data', {});
 axes(handles.axes1);
+
 %Save start time
 start = tic;
 
@@ -104,6 +105,7 @@ start = tic;
 height = 100;
 width = 50;
 sizes = [height, width];
+
 %Compute the alphabets once
 alphabet = getAlphabet(width,height,1);
 
@@ -122,13 +124,7 @@ while(hasFrame(handles.vidObj))
         guidata(hObject,handles);
         
         %Get the new plate image and license plate string
-        [newPlate, plateImage] = processImage(vidFrame, sizes, alphabet);
-        
-        %Display the current plate that was detected  
-%         axes(handles.axes3);
-%         if plateImage ~= -1   
-%             image(plateImage);
-%         end
+        [newPlate, ~] = processImage(vidFrame, sizes, alphabet);
         
         if ~isempty(newPlate)
             %Get old data from the table
@@ -143,14 +139,14 @@ while(hasFrame(handles.vidObj))
 end
 %Get the output from the table
 tableData = get(handles.uitable1, 'Data');
-% checkSolution(tableData, solutionFile);
+
 %First process the solution to get most common solution per plate
 results = getFinalTable(tableData);
-checkSolution(results, solutionFile);
-
 display(results);
 
-%Display duration of vidoe + processing
+checkSolution(results, solutionFile);
+
+%Display duration of video + processing
 duration = toc(start);
 display(duration);
 

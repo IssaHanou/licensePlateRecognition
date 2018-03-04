@@ -1,11 +1,4 @@
 function [plateString, plateIm] = processImage(image, sizes, alphabet)
-%For debugging purposes
-% image = imread('images/28.JPG');
-% height = 100;
-% width = 50;
-% sizes = [height, width];
-% alphabet = getAlphabet(width,height,1);
-
 %Resize the image (as it is too big)
 img = imresize(image,[400 NaN]);
 

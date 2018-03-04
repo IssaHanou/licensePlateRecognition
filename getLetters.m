@@ -27,8 +27,7 @@ st = regionprops(bw, 'Area', 'BoundingBox');
 areas = [st.Area]; %Into array
 current = 1;
 endAt = 0;
-%%%%%%%%%%Skip this, just take first 6 bounding boxes bigger than thres (ratio of
-%the picture size)
+
 while current ~= 7 && endAt ~= 15
     [~,n] = max( areas ); %Get the biggest area
     areas(n) = 0; %Set 0 for that position so we can get the second biggest area next time

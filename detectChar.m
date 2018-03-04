@@ -13,11 +13,9 @@ end
 
 %Get the hog features of this image
 features = extractHOGFeatures(image);
-%array to store the differences with each letter
+%Array to store the differences with each letter
 diffArray = zeros(1,length(chars));
 
-%How i'd try without for loop
-%diffArray(1:length(chars)) = sum(abs(features - alphabet(1:length(chars),:)));
 for i=1:length(chars)
     diffArray(i) = sum(abs(features - alphabet(i,:)));
 end
